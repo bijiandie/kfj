@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.kfj.entity.Baby" table="baby">
+        <id name="id" column="id" type="java.lang.Integer"></id>
+        <property name="csbh" type="java.lang.String" column="csbh"/>       
+        <property name="name" type="java.lang.String" column="name"/> 
+        <property name="sex" type="java.lang.String" column="sex"/>  
+        <property name="age" type="java.lang.String" column="age"/>  
+        <property name="phone" type="java.lang.String" column="phone"/>  
+        <property name="ywydm" type="java.lang.String" column="ywydm"/>  
+        <property name="picture" type="java.lang.String" column="picture"/>  
+        <property name="talent" type="java.lang.String" column="talent"/>  
+        <property name="czjy" type="java.lang.String" column="czjy"/>  
+        <property name="tps" type="java.lang.Integer" column="tps"/>         
+    </class>
+
+</hibernate-mapping>

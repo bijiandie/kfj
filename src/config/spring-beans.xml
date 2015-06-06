@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--后台登入  -->	
+	<bean id="userDao" class="com.kfj.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="userManagerBase" class="com.kfj.service.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+
+	<bean name="userManager" parent="transactionProxy">
+		<property name="target" ref="userManagerBase"></property>
+	</bean>	
+
+<!--baby列表  -->	
+	<bean id="babyDao" class="com.kfj.dao.BabyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="babyManagerBase" class="com.kfj.service.BabyServiceImpl">
+		<property name="babyDao" ref="babyDao"></property>
+	</bean>
+
+	<bean name="babyManager" parent="transactionProxy">
+		<property name="target" ref="babyManagerBase"></property>
+	</bean>	
+
+</beans>
