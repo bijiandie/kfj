@@ -15,9 +15,9 @@
 	</bean> -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://rdsna1n1jlf9949k16qvp.mysql.rds.aliyuncs.com:3306/webank?useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <property name="username" value="webank"/>
-        <property name="password" value="webank18"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/kfj?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
 	</bean>
 	
 	<!-- 配置SessionFactory -->
