@@ -71,6 +71,8 @@ public class BabyController {
 				a.append("0");
 			}
 			csbh = a+csbh;
+		}else{
+			csbh="000001";
 		}
 		if(baby.getYwydm()!=null){
 			baby.setYwydm(baby.getYwydm()+"@pa18.com");
