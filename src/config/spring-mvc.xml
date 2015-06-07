@@ -18,7 +18,9 @@
 	
 	<!-- 静态资源(js/image)的访问 -->
 	<mvc:resources location="/js/" mapping="/js/**"/>
-	<mvc:resources location="/upload/" mapping="/upload/**"/>
+	<mvc:resources location="/prefer/" mapping="/prefer/**"/>
+	<mvc:resources location="/admin/" mapping="/admin/**"/>
+	
 	<!-- 定义视图解析器 -->	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"></property>

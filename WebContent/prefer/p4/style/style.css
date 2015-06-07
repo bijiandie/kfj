@@ -1,0 +1,46 @@
+/*通用样式*/
+*{margin:0;padding:0;word-wrap:break-word;}
+body{font:12px/1.75 "宋体", arial, sans-serif,'DejaVu Sans','Lucida Grande',Tahoma,'Hiragino Sans GB',STHeiti,SimSun,sans-serif;color:#444;}
+
+html, body, h1, h2, h3, h4, ul, li, dl,input{ font-family:Arial, Helvetica, sans-serif;  margin:0px;padding:0px;list-style-type:none }
+a{color:#333;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a img{border:none;} 
+div,ul,li,p,form{padding: 0px; margin: 0px;list-style-type: none;}
+em{font-style: normal;font-weight: normal;}
+table {padding: 0px; margin: 0px;list-style-type: none;}
+dt,dl,dd {padding: 0px; margin: 0px;list-style-type: none;}
+form{margin:0px;padding:0px;}
+tr {padding: 0px; margin: 0px;list-style-type: none;}
+h3,h4{padding:0px; font-size:14px; font-weight:bold;}
+.clear {clear:both;height:0px; overflow:hidden;}
+.blank10{height:10px;overflow:hidden;}
+.dotline{border-bottom:#CCC 1px dashed;margin:8px;}
+input::-webkit-input-placeholder {
+color: #b1aba5 !important; /* WebKit browsers */
+}
+input:-moz-placeholder {
+color: #b1aba5 !important; /* Mozilla Firefox 4 to 18 */
+}
+input::-moz-placeholder {
+color: #b1aba5 !important; /* Mozilla Firefox 19+ */
+}
+input:-ms-input-placeholder {
+color: #b1aba5 !important; /* Internet Explorer 10+ */
+}
+
+
+/*内容样式*/
+.content .dimg{
+    width: 100%;
+    height: auto;
+    float: left;
+}
+.content .down img{
+    float: left;
+    width: 47%;
+    margin-left: 2%;
+}
+.clear{
+    clear: both;
+}
