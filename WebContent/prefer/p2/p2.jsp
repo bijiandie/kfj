@@ -101,7 +101,7 @@
             <div class="form">
                 <ul>
                     <li><div class="left"><span>*</span>宝 贝 姓 名&nbsp;</div><div class="right"><input id="name" type="text" name="name" placeholder="必填" /></div></li>
-                    <li><div class="left"><span>*</span>宝 贝 性 别&nbsp;</div><div class="right"><input type="text" name="sex" placeholder="必填" /></div></li>
+                    <li><div class="left"><span>*</span>宝 贝 性 别&nbsp;</div><div class="right"><input type="text" name="sex" placeholder="必填" /> </div></li>
                     <li><div class="left"><span>*</span>宝 贝 年 龄&nbsp;</div><div class="right"><input id="age" type="text" name="age" placeholder="必填" /></div></li>
                     <li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
                     <li><div class="left"><span>&nbsp;</span>业务员代码&nbsp;</div><div class="right"><input id="ywydm" type="text" name="ywydm" /></div></li>
