@@ -48,8 +48,8 @@ color: #b1aba5 !important; /* Internet Explorer 10+ */
 .form li{
     float: left;
     width: 96%;
-    height: 78px;
-    line-height: 78px;
+    height: 10vw;
+    line-height: 10vw;
 }
 .form .gli{
     float: left;
@@ -75,7 +75,7 @@ color: #b1aba5 !important; /* Internet Explorer 10+ */
 }
 .form input{
     width: 100%;
-    height: 50px;
+    height: 6vw;;
     border: none;
     border-radius: 7px;
     font-size: 5vw;
