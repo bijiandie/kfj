@@ -1,16 +1,12 @@
 package com.kfj.control;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kfj.entity.Baby;
 import com.kfj.service.inft.BabyService;
 import com.kfj.util.Config;
-import com.kfj.util.UploadHandle;
-import com.qiniu.common.QiniuException;
+import com.kfj.util.ImgCompress;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 
 @Controller
 @RequestMapping("/baby")
@@ -104,7 +98,12 @@ public class BabyController {
 			Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 			String token = auth.uploadToken(bucketName);
 			String picName = rename(file.getOriginalFilename());
-			Response r = uploadManager.put(file.getBytes(), picName, token);
+			//Ñ¹ËõÍ¼Æ¬
+	        String img = picName.substring(picName.lastIndexOf(".")+1);
+			ImgCompress imgCom = new ImgCompress(file.getInputStream(),img);
+			byte[] data = imgCom.resizeFix(Config.IMG_WIDTH,Config.IMG_HIGTH);
+			
+			Response r = uploadManager.put(data,picName,token);
 			System.out.println("status:"+r.statusCode);
 			
 			Baby baby = new Baby();
@@ -136,6 +135,7 @@ public class BabyController {
 			babyManager.addBaby(baby);
 			model.addAttribute("csbh", csbh);
 		}catch(Exception ex){
+			System.out.println(ex);
 			return "/prefer/p3/p3Error";
 		}
 		return "/prefer/p3/p3";
