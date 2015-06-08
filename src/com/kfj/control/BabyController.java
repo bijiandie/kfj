@@ -136,7 +136,7 @@ public class BabyController {
 			babyManager.addBaby(baby);
 			model.addAttribute("csbh", csbh);
 		}catch(Exception ex){
-			return "/prefer/p3/p3";
+			return "/prefer/p3/p3Error";
 		}
 		return "/prefer/p3/p3";
 	}

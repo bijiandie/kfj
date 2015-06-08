@@ -6,15 +6,17 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" type="text/css" href="../prefer/p3/style/style.css" />
-        <script type="text/javascript" src="../js/jquery-1.7.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <script type="text/javascript" src="style/jquery-1.7.1.js"></script>
     </head>
     <script type="text/javascript">
   //显示灰色 jQuery 遮罩层 
 	function showBg() {
-		var bh = $("body").height();
+		var bh = 1700;
+		alert(bh);
 		var bw = $("body").width();
 		$("#fullbg").css({
+			height : bh,
 			width : bw,
 			display : "block"
 		});
@@ -27,25 +29,25 @@
 </script>
     <body>
         <div class="content">
-            <img src="../prefer/p3/style/p3_01.jpg" class="img" />
+            <img src="style/p3_01.jpg" class="img" />
             <div class="clear"></div>
             <div class="wz">您的参赛编号是<br>${csbh }</div>
-            <img src="../prefer/p3/style/p3_03.jpg" class="img" />
+            <img src="style/p3_03.jpg" class="img" />
             <div class="clear"></div>
             <div class="an1">
-                <p style="height: auto;"><a href="javascript:showBg();"><img src="../prefer/p3/style/p3_08.png" /></a></p>
+                <p style="height: auto;"><a href="javascript:showBg();"><img src="style/p3_08.png" /></a></p>
             </div>
-            <div id="fullbg" style="height: 100%;"></div>
+            <div id="fullbg"></div>
 			<div id="dialog">
 				<p class="close">
 					<a href="#" onclick="closeBg();">关闭</a> 
 				</p>
-				<div><img src="../prefer/p3/style/p3_10.jpg" class="img" /></div>
+				<div><img src="style/p3_10.jpg" class="img" /></div>
 			</div>
-            <img src="../prefer/p3/style/p3_05.jpg" class="img" />
+            <img src="style/p3_05.jpg" class="img" />
             <div class="clear"></div>
-            <div class="an2"><img src="../prefer/p3/style/p3_09.png" /></div>
-            <img src="../prefer/p3/style/p3_07.jpg" class="img" />
+            <div class="an2"><a href=""><img src="style/p3_09.png" /></a></div>
+            <img src="style/p3_07.jpg" class="img" />
         </div>
     </body>
 </html>
