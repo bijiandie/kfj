@@ -2,7 +2,7 @@
 *{margin:0;padding:0;word-wrap:break-word;}
 body{font:12px/1.75 "宋体", arial, sans-serif,'DejaVu Sans','Lucida Grande',Tahoma,'Hiragino Sans GB',STHeiti,SimSun,sans-serif;color:#444;}
 
-html, body, h1, h2, h3, h4, ul, li, dl,input{ font-family:Arial, Helvetica, sans-serif;  margin:0px;padding:0px;list-style-type:none }
+html, body, h1, h2, h3, h4, ul, li, dl,input,select{ font-family:Arial, Helvetica, sans-serif;  margin:0px;padding:0px;list-style-type:none }
 a{color:#333;text-decoration:none;}
 a:hover{text-decoration:underline;}
 a img{border:none;} 
@@ -88,6 +88,17 @@ color: #b1aba5 !important; /* Internet Explorer 10+ */
     padding: 3%;
     padding-left: 3%;
     width: 97%;
+}
+.form select{
+    width: 103%;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    font-size: 5vw;
+    padding-left: 3%;
+    -webkit-appearance:none;
+    background:#ffffff;
+  
 }
 .bar{ width:100%; height:50px; background-color:#000; font-size:18px; position:fixed; top:0; left:0; opacity:0.9;}
 .close{ background:url(x.png) no-repeat 10px 5px; background-size:24px 26px; width:50px; height:50px; float:right; display:inline-block; text-indent:-9999px;}

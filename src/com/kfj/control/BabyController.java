@@ -30,7 +30,7 @@ public class BabyController {
 	private BabyService babyManager;
 		
 	/**
-	 * TODO ÁĞ³öbaby
+	 * TODO ï¿½Ğ³ï¿½baby
 	 * @return
 	 */
 	@RequestMapping("/getAllBaby")
@@ -41,7 +41,7 @@ public class BabyController {
 	}
 	
 	/**
-	 * TODO ĞÂÔöbaby
+	 * TODO ï¿½ï¿½ï¿½ï¿½baby
 	 * @return
 	 * @throws Exception 
 	 */
@@ -56,9 +56,9 @@ public class BabyController {
 		Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		String token = auth.uploadToken(bucketName);
 		String url = baby.getPicture();
-		//´¦Àí»ñÈ¡µ½µÄÉÏ´«ÎÄ¼şµÄÎÄ¼şÃûµÄÂ·¾¶²¿·Ö£¬Ö»±£ÁôÎÄ¼şÃû²¿·Ö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
         filename = filename.substring(filename.lastIndexOf("\\")+1);
-        //Éú³ÉÉÏ´«ÎÄ¼şµÄÎÄ¼şÃû
+        //ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
         String pic = this.makeFileName(filename);
 		Response r = uploadManager.put(new File(url), pic, token);
 		System.out.println("status:"+r.statusCode);
@@ -98,7 +98,7 @@ public class BabyController {
 			Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 			String token = auth.uploadToken(bucketName);
 			String picName = rename(file.getOriginalFilename());
-			//Ñ¹ËõÍ¼Æ¬
+			//Ñ¹ï¿½ï¿½Í¼Æ¬
 	        String img = picName.substring(picName.lastIndexOf(".")+1);
 			ImgCompress imgCom = new ImgCompress(file.getInputStream(),img);
 			byte[] data = imgCom.resizeFix(Config.IMG_WIDTH,Config.IMG_HIGTH);
@@ -136,21 +136,21 @@ public class BabyController {
 			model.addAttribute("csbh", csbh);
 		}catch(Exception ex){
 			System.out.println(ex);
-			return "/prefer/p3/p3Error";
+			return "/prefer/p3/500";
 		}
 		return "/prefer/p3/p3";
 	}
 	
 	/**
 	    * @Method: makeFileName
-	    * @Description: Éú³ÉÉÏ´«ÎÄ¼şµÄÎÄ¼şÃû£¬ÎÄ¼şÃûÒÔ£ºuuid+"_"+ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
+	    * @Description: ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ô£ï¿½uuid+"_"+ï¿½Ä¼ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½
 	    * @Anthor:
-	    * @param filename ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
-	    * @return uuid+"_"+ÎÄ¼şµÄÔ­Ê¼Ãû³Æ
+	    * @param filename ï¿½Ä¼ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½
+	    * @return uuid+"_"+ï¿½Ä¼ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½
 	    */
 	private String makeFileName(String filename){  //2.jpg
         filename = filename.substring(filename.lastIndexOf("\\")+1);
-        //Îª·ÀÖ¹ÎÄ¼ş¸²¸ÇµÄÏÖÏó·¢Éú£¬ÒªÎªÉÏ´«ÎÄ¼ş²úÉúÒ»¸öÎ¨Ò»µÄÎÄ¼şÃû
+        //Îªï¿½ï¿½Ö¹ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÎªï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Î¨Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
         return UUID.randomUUID().toString() + "_" + filename;
     }
 	

@@ -101,11 +101,37 @@
             <div class="form">
                 <ul>
                     <li><div class="left"><span>*</span>宝 贝 姓 名&nbsp;</div><div class="right"><input id="name" type="text" name="name" placeholder="必填" /></div></li>
-                    <li><div class="left"><span>*</span>宝 贝 性 别&nbsp;</div><div class="right"><input type="text" name="sex" placeholder="必填" /> </div></li>
-                    <li><div class="left"><span>*</span>宝 贝 年 龄&nbsp;</div><div class="right"><input id="age" type="text" name="age" placeholder="必填" /></div></li>
-                    <li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
+                     <li>
+						<div class="left"><span>*</span>宝 贝 性 别&nbsp;</div><div class="right">
+							<select name="sex">
+							  <option value="男">男</option>
+							  <option value="女">女</option>
+							</select>
+						</div>
+					</li>
+					<li>
+						<div class="left"><span>*</span>宝 贝 年 龄&nbsp;</div>
+						<div class="right">
+							<select name="age">
+							  <option value="0">0</option>
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6" selected="selected">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option>
+							  <option value="11">11</option>
+							  <option value="12">12</option>
+							</select>
+						</div>
+					</li>
+					<li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
                     <li><div class="left"><span>&nbsp;</span>业务员代码&nbsp;</div><div class="right"><input id="ywydm" type="text" name="ywydm" /></div></li>
-                    <li><div class="left"><span>*</span>宝 贝 照 片&nbsp;</div><div class="right"><input id="picture" type="file" name="picture" accept="image/*;capture=camera" /></div></li>
+                    <li><div class="left"><span>*</span>宝 贝 照 片&nbsp;</div><div class="right"><input id="picture" type="file" name="picture" accept="image/*;capture=camera"/></div></li>
                     <li><div class="left"><span>&nbsp;</span>参 赛 才 艺&nbsp;</div><div class="right"><input id="talent" type="text" name="talent" /></div></li>
                     <li class="gli"><div class="left"><span>&nbsp;</span>成 长 寄 语&nbsp;</div><div class="right"><textarea id="czjy" name="czjy"></textarea></div></li>
                     <li></li>
