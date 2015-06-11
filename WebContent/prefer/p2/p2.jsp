@@ -10,7 +10,7 @@
         <script type="text/javascript">
 	function ljbm(){
 		if(document.getElementById('name').value==''){
-    		document.getElementById ("bdnr").innerHTML="用户名不能为空！";
+    		document.getElementById ("bdnr").innerHTML="宝贝姓名不能为空！";
         	document.getElementById("bar").style.display="";
 			   return false;
 			}
