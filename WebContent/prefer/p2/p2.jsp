@@ -7,27 +7,39 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" type="text/css" href="style/style.css" />
-        <script type="text/javascript">
+         
+<script type="text/javascript">
 	function ljbm(){
 		if(document.getElementById('name').value==''){
     		document.getElementById ("bdnr").innerHTML="宝贝姓名不能为空！";
         	document.getElementById("bar").style.display="";
 			   return false;
 			}
+		if(document.getElementById('sex').value==-1){
+			document.getElementById ("bdnr").innerHTML="宝贝性别未选择！";
+        	document.getElementById("bar").style.display="";
+			   return false;
+			}
+		
 		if(document.getElementById('age').value==''){
 			document.getElementById ("bdnr").innerHTML="宝贝年龄不能为空！";
         	document.getElementById("bar").style.display="";
 			   return false;
 			}else{
 				var age = document.getElementById('age').value;
+				if(age==-1){
+					document.getElementById ("bdnr").innerHTML="宝贝年龄未选！";
+		        	document.getElementById("bar").style.display="";
+					return false;
+				}
 				var regAge = /^120$|^((1[0-1]|[1-9])?\d)$/m;
 				if(regAge.test(age)==false){
 					document.getElementById ("bdnr").innerHTML="宝贝年龄有误！";
 		        	document.getElementById("bar").style.display="";
 					return false;
-					}
+					}				
 			}
-		if(document.getElementById('phone').value==''){
+		/* if(document.getElementById('phone').value==''){
 			document.getElementById ("bdnr").innerHTML="联系电话不能为空！";
         	document.getElementById("bar").style.display="";
 			return false;
@@ -39,9 +51,28 @@
 			         document.getElementById("bar").style.display="";
 					 return false;
 				 }
+			} */
+		if(document.getElementById('ywydm').value==''){
+			document.getElementById ("bdnr").innerHTML="业务员代码不能为空！";
+        	document.getElementById("bar").style.display="";
+			return false;
+			}else{
+				var tel = document.getElementById('ywydm').value;
+				var reg = /^(1120|1121)\d{6}$/;
+				 if (reg.test(tel)==false) {
+					 document.getElementById ("bdnr").innerHTML="业务员代码有误！";
+			         document.getElementById("bar").style.display="";
+					 return false;
+				 }
 			}
+		
 		if(document.getElementById('picture').value==''){
 			document.getElementById ("bdnr").innerHTML="请上传宝贝照片！";
+        	document.getElementById("bar").style.display="";
+			   return false;
+			}
+		if(document.getElementById('czjy').value==''){
+    		document.getElementById ("bdnr").innerHTML="成长寄语不能为空！";
         	document.getElementById("bar").style.display="";
 			   return false;
 			}
@@ -63,7 +94,8 @@
                     <li><div class="left"><span>*</span>宝 贝 姓 名&nbsp;</div><div class="right"><input id="name" type="text" name="name" placeholder="必填" /></div></li>
                      <li>
 						<div class="left"><span>*</span>宝 贝 性 别&nbsp;</div><div class="right">
-							<select name="sex">
+							<select id="sex" name="sex">
+							  <option value="-1">未选择</option>
 							  <option value="男">男</option>
 							  <option value="女">女</option>
 							</select>
@@ -73,13 +105,14 @@
 						<div class="left"><span>*</span>宝 贝 年 龄&nbsp;</div>
 						<div class="right">
 							<select id="age" name="age">
+							  <option value="-1">未选择</option>
 							  <option value="0">0</option>
 							  <option value="1">1</option>
 							  <option value="2">2</option>
 							  <option value="3">3</option>
 							  <option value="4">4</option>
 							  <option value="5">5</option>
-							  <option value="6" selected="selected">6</option>
+							  <option value="6">6</option>
 							  <option value="7">7</option>
 							  <option value="8">8</option>
 							  <option value="9">9</option>
@@ -89,11 +122,11 @@
 							</select>
 						</div>
 					</li>
-					<li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
-                    <li><div class="left"><span>&nbsp;</span>业务员代码&nbsp;</div><div class="right"><input id="ywydm" type="text" name="ywydm" /></div></li>
+<!-- 					<li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
+ -->                    <li><div class="left"><span>*</span>业务员代码&nbsp;</div><div class="right"><input id="ywydm" type="text" name="ywydm" placeholder="必填" /></div></li>
                     <li><div class="left"><span>*</span>宝 贝 照 片&nbsp;</div><div class="right"><input id="picture" type="file" name="picture" accept="image/*;capture=camera"/></div></li>
                     <li><div class="left"><span>&nbsp;</span>参 赛 才 艺&nbsp;</div><div class="right"><input id="talent" type="text" name="talent" /></div></li>
-                    <li class="gli"><div class="left"><span>&nbsp;</span>成 长 寄 语&nbsp;</div><div class="right"><textarea id="czjy" name="czjy"></textarea></div></li>
+                    <li class="gli"><div class="left"><span>*</span>成 长 寄 语&nbsp;</div><div class="right"><textarea id="czjy" name="czjy"></textarea></div></li>
                     <li></li>
                 </ul>
             </div>

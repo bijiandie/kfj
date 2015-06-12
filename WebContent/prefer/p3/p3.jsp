@@ -24,6 +24,18 @@
 	function closeBg() {
 		$("#fullbg,#dialog").hide();
 	}
+	function DoShare() {
+        $(".sharemask").show();
+    }
+
+	 $(function () {
+		 $("#sharemask").click(function () {
+             $(".sharemask").hide();
+         });
+
+     });
+
+
 </script>
     <body>
         <div class="content">
@@ -44,7 +56,11 @@
 			</div>
             <img src="../prefer/p3/style/p3_05.jpg" class="img" />
             <div class="clear"></div>
-            <div class="an2"><img src="../prefer/p3/style/p3_09.png" /></div>
+            <div class="an2"><img src="../prefer/p3/style/p3_09.png" onclick="DoShare()" /></div>   
+            <div class="dialog1 sharemask">
+        		<img src="../prefer/p3/style/vote-share.png" alt="" style="width: 100%; height: auto"
+            		id="sharemask" />
+    		</div>        
             <img src="../prefer/p3/style/p3_07.jpg" class="img" />
         </div>
     </body>

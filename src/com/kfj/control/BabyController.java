@@ -87,7 +87,7 @@ public class BabyController {
 	@RequestMapping(value = "/upload.do")
 	public String upload(@RequestParam("picture") MultipartFile file,
 			@RequestParam("name")String name,@RequestParam("sex")String sex,@RequestParam("age")String age,
-			@RequestParam("phone")String phone,@RequestParam("ywydm")String ywydm,@RequestParam("talent")String talent,
+			@RequestParam("ywydm")String ywydm,@RequestParam("talent")String talent,
 			@RequestParam("czjy")String czjy,Model model){
 		String ACCESS_KEY = Config.ACCESS_KEY;
 		String SECRET_KEY = Config.SECRET_KEY;
@@ -109,7 +109,6 @@ public class BabyController {
 			Baby baby = new Baby();
 			baby.setName(name);
 			baby.setAge(age);
-			baby.setPhone(phone);
 			baby.setSex(sex);
 			baby.setPicture(picName);
 			baby.setCsbh(csbh);
