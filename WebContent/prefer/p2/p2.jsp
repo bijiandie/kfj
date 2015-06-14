@@ -88,7 +88,7 @@
         <div class='content'>
             <div class="bar" id="bar" style="display:none"><span id="bdnr"></span><a href="javascript:close();" class="close">关闭</a></div>        
             <div><img src='style/p2_01.jpg' /></div>
-            <form action="/kfj/baby/upload.do" method="post" name="bmForm" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>/baby/upload.do" method="post" name="bmForm" enctype="multipart/form-data">
             <div class="form">
                 <ul>
                     <li><div class="left"><span>*</span>宝 贝 姓 名&nbsp;</div><div class="right"><input id="name" type="text" name="name" placeholder="必填" /></div></li>

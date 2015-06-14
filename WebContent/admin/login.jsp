@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	function login(){
 		var form = document.forms[0];
-		form.action = "/kfj/user/getUser";
+		form.action = "<%=request.getContextPath()%>/user/getUser";
 		form.method="post";
 		form.submit();
 	}

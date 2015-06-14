@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,11 +85,14 @@ public class BabyController {
 		return "/prefer/p3/p3";
 	}*/
 	
-	@RequestMapping(value = "/upload.do")
-	public String upload(@RequestParam("picture") MultipartFile file,
-			@RequestParam("name")String name,@RequestParam("sex")String sex,@RequestParam("age")String age,
-			@RequestParam("ywydm")String ywydm,@RequestParam("talent")String talent,
-			@RequestParam("czjy")String czjy,Model model){
+	@RequestMapping(value = "/upload.do",method=RequestMethod.POST)
+	public String upload(@RequestParam(value="picture",required=false) MultipartFile file,
+			@RequestParam(value="name",required=false)String name,
+			@RequestParam(value="sex",required=false)String sex,
+			@RequestParam(value="age",required=false)String age,
+			@RequestParam(value="ywydm",required=false)String ywydm,
+			@RequestParam(value="talent",required=false)String talent,
+			@RequestParam(value="czjy",required=false)String czjy,Model model){
 		String ACCESS_KEY = Config.ACCESS_KEY;
 		String SECRET_KEY = Config.SECRET_KEY;
 		String bucketName = Config.BUCKETNAME;
@@ -98,7 +102,6 @@ public class BabyController {
 			Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 			String token = auth.uploadToken(bucketName);
 			String picName = rename(file.getOriginalFilename());
-			//ѹ��ͼƬ
 	        String img = picName.substring(picName.lastIndexOf(".")+1);
 			ImgCompress imgCom = new ImgCompress(file.getInputStream(),img);
 			byte[] data = imgCom.resizeFix(Config.IMG_WIDTH,Config.IMG_HIGTH);
@@ -133,6 +136,7 @@ public class BabyController {
 			baby.setCsbh(String.valueOf(csbh));
 			babyManager.addBaby(baby);
 			model.addAttribute("csbh", csbh);
+			
 		}catch(Exception ex){
 			System.out.println(ex);
 			return "/prefer/p3/500";
@@ -158,4 +162,9 @@ public class BabyController {
         String str = fileName.substring(i);
         return new Date().getTime()+""+ new Random().nextInt(99999999) +str;
     }
+	
+	@RequestMapping(value = "/upload.do",method=RequestMethod.GET)
+	public String test(){
+		return "/prefer/p4/p4";
+	}
 }

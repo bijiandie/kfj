@@ -44,7 +44,7 @@
 				document.getElementById("picture_message").innerText = "";
 			}
 		var form = document.forms[0];
-		form.action = "/kfj/baby/addBaby";
+		form.action = "<%=request.getContextPath()%>/baby/addBaby";
 		form.method="post";
 		form.submit();
 	}
