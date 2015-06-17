@@ -48,8 +48,12 @@ public class BabyServiceImpl implements BabyService {
 	}
 
 	@Override
-	public Baby getBabyByCsbh(String csbh){
+	public List<Baby> getBabyByCsbh(String csbh){
 		return babyDao.getBabyByCsbh(csbh);
+	}
+	@Override
+	public List<Baby> getBabyByBbxm(String bbxm){
+		return babyDao.getBabyByBbxm(bbxm);
 	}
 	
 }

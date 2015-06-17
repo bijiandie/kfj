@@ -66,10 +66,16 @@ public class BabyDaoImpl implements BabyDao {
 		return tps;
 	}
 	
-	public Baby getBabyByCsbh(String csbh){
-		String hql = "from Baby where csbh = "+csbh;	
+	public List<Baby> getBabyByCsbh(String csbh){
+		String hql = "from Baby where csbh like '%"+csbh+"%'";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return (Baby) query.list().get(0);
+		return query.list();
+	}
+	
+	public List<Baby> getBabyByBbxm(String bbxm){
+		String hql = "from Baby where name like '%"+bbxm+"%'";	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return query.list();
 	}
 	
 }

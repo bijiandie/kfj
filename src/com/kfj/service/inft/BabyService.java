@@ -36,6 +36,21 @@ public interface BabyService {
 	 * @return
 	 */
 	public int getLjtp();
+	/**
+	 * 根据投票数获取
+	 * @return
+	 */
 	public List<Baby> getAllBabyByTps();
-	public Baby getBabyByCsbh(String csbh);
+	/**
+	 * 根据参赛编号获取
+	 * @param csbh
+	 * @return
+	 */
+	public List<Baby> getBabyByCsbh(String csbh);
+	/**
+	 * 根据宝贝姓名获取
+	 * @param csbh
+	 * @return
+	 */
+	public List<Baby> getBabyByBbxm(String bbxm);
 }

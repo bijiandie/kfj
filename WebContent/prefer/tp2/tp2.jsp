@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 String path = request.getContextPath();
@@ -16,8 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="apple-mobile-web-app-title" content="">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta content="telephone=no" name="format-detection">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
-    <link rel="stylesheet" type="text/css" href="style/other.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/prefer/tp2/style/main.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/prefer/tp2/style/other.css">
     <script type="application/x-javascript">addEventListener('DOMContentLoaded',function(){setTimeout(function(){scrollTo(0,1);},0);},false);</script>
     <style type="text/css">
         body
@@ -131,56 +132,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			font-size: 4.3vw;
 			padding: 11px;
 		}
+		.dialog1
+		{
+		    position:fixed;
+		    z-index: 99999;
+		    width: 100%;
+		    height: 100%;
+		    left: 0px;
+		    top: 0px;
+		    display: none;
+		}
     </style>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+	    function DoShare() {
+	        $(".sharemask").show();
+	    }
+	
+		 $(function () {
+			 $("#sharemask").click(function () {
+	             $(".sharemask").hide();
+	         });
+	
+	     });
+    </script>
 </head>
 <body>
     <noscript>
         <div id="noscript" style="background: #EA6201; width: 100%; color: #fff; border-top: 1px solid #cf5702;
             padding: 5px 0px;">
             您当前的浏览器不支持JavaSctip脚本，请确认浏览器是否开启JavaSctip脚本或刷新页面重试 <a href="/" style="text-decoration: underline;">
-                刷新</a></div>
+                刷新</a>
+        </div>
     </noscript>
     <form method="post" action="" id="form1">
 
     <div class="item-info">
         <span style="position: absolute; height: 40px; top: 10px; right: 12px; text-align: right;">
-		<i style="font-style: normal; font-family: Arial;" id="VoteLaud">944</i>
+		<i style="font-style: normal; font-family: Arial;" id="VoteLaud">${baby.tps }</i>
 		票 
 		</span>
-		<span style=" display:block; padding:0px 60px 0px 12px"><i style="font-style: normal; font-family: Arial;">579</i>号</span>
-		<span style="position: absolute;right: 44%;top: 10px;">章宸希</span>
-     
+		<span style=" display:block; padding:0px 60px 0px 12px"><i style="font-style: normal; font-family: Arial;">${baby.csbh }</i>号</span>
+		<span style="position: absolute;right: 44%;top: 10px;">${baby.name }</span>    
     </div>
     <div class="item-logo">
-        <img src="style/ou6Lyji89CGtF9ZHod-yyeICamPA.jpg" id="ItemLink">
+        <img src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby.picture }" id="ItemLink">
     </div>
     <div class="item-summary item-desc">
         <div class="frame">
             <p>
 			<span style="position: absolute; height: 40px; top: 20px; right: 12px; text-align: right;">
-			<i style="font-style: normal; font-family: Arial;" id="VoteLaud">944</i>
+			<i style="font-style: normal; font-family: Arial;" id="VoteLaud">${baby.tps }</i>
 			票 
 			</span>
-			<span style=" display:block;"><i style="font-style: normal; font-family: Arial;">579</i>号</span>
-			<span style="position: absolute;right: 44%;top: 20px;">章宸希</span>
+			<span style=" display:block;"><i style="font-style: normal; font-family: Arial;">${baby.csbh }</i>号</span>
+			<span style="position: absolute;right: 44%;top: 20px;">${baby.name }</span>
             </p>
-			<p>参赛才艺： 歌曲</p>
+			<p>参赛才艺： ${baby.talent }</p>
 			<p>成长宣言：</p>
-            <p>弥勒佛来弥勒佛来咯弥勒佛</p>
+            <p>${baby.czjy }</p>
         </div>
     </div>
-    <div class="control">
+    <!-- <div class="control">
 		<div class="an_h">给我投票，请关注公众号，在公众号内回复***</div>
-    </div>
+    </div> -->
+    
+    <div class="control">    
+        <img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_06.png"/> 
+ 		<a onclick="DoShare()"><img alt="" style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_08.png"></a>
+ 	</div>
     
     <div class="control">
-       <img style="width:48%;float:left;" src="style/p2_06.png" />
-       <img style="width:48%;float:right;" src="style/p2_08.png" />
-    </div>
-    
-    <div class="control">
-       <img style="width:48%;float:left;" src="style/p2_12.png" />
-       <img style="width:48%;float:right;" src="style/p2_13.png" />
+   		
+       <a href="<%=request.getContextPath()%>/prefer/p4/p4.jsp"><img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_12.png" /></a>
+       <img style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_13.png" />
     </div>
     <div class="item-summary item-desc" style="display: none;" id="JoinTip">
         <div class="frame">
@@ -203,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="item-summary">
         <div class="frame" style="padding:5%;">
-            <img src="style/p2_bottom.jpg" style="margin:0px auto;" />
+            <img src="<%=request.getContextPath()%>/prefer/tp2/style/p2_bottom.jpg" style="margin:0px auto;" />
         </div>
     </div>
     <a href="tel:0571-1234556" class="more" style="color: #fff; display: block; text-align: center;
@@ -214,9 +239,96 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="dialog alert">
         <i class="form"><span class="txt">提示</span> <a onclick="HideAlert()">确定</a> </i>
     </div>
-    <div class="dialog sharemask">
-        <img src="style/vote-share.png" alt="" style="width: 100%; height: auto" id="sharemask">
-    </div>
+	<div class="dialog1 sharemask">
+        <img src="<%=request.getContextPath()%>/prefer/tp2/style/vote-share.png" alt="" style="width: 100%; height: auto" id="sharemask" />
+    </div> 
+    
     </form>
 </body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var url = location.href.split('#')[0];
+	$.ajax({
+	    url:'<%=request.getContextPath()%>/WXController/getSingInfo',
+	    type:'post',     
+	    data:'url='+url,
+	    error:function(){     
+	       alert('error');
+	    },     
+	    success:function(data){
+	       data=eval("("+data+")");//转换为json对象
+	       var appid = data.appid;
+	       var timestamp = data.timestamp;
+	       var nonceStr = data.nonceStr;
+	       var signature = data.signature;
+	       var domain = data.domain;
+	       alert(""+appid+"="+timestamp+"="+nonceStr+"="+signature+"="+domain+"");
+	       //注册事件
+	       wx.config({
+	    	    debug: true,
+	    	    appId: appid,
+	    	    timestamp: timestamp,
+	    	    nonceStr: nonceStr,
+	    	    signature: signature,
+	    	    jsApiList: [
+	    	      'checkJsApi',
+	    	      'onMenuShareTimeline',
+	    	      'onMenuShareAppMessage',
+	    	      'onMenuShareQQ',
+	    	      'onMenuShareWeibo'
+	    	    ]
+	    	});
+	       
+	       	wx.error(function (res) {
+	    		//alert(res.errMsg);
+	    	});
+	       
+	       	wx.ready(function () {
+	       		// 2. 分享接口
+	       		// 2.1 监听“分享给朋友”，自定义分享内容及分享结果接口
+	       		wx.onMenuShareAppMessage({
+	       		    title: '我是小明星',
+	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+	       		    link: domain+'<%=request.getContextPath()%>/prefer/p2/p2.jsp',
+	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+	       		    trigger: function (res) {
+	       		      alert('用户点击发送给朋友');
+	       		    },
+	       		    success: function (res) {
+	       		      alert('已分享');
+	       		    },
+	       		    cancel: function (res) {
+	       		      alert('已取消');
+	       		    },
+	       		    fail: function (res) {
+	       		      alert(JSON.stringify(res));
+	       		    }
+	       		  });
+	       		
+	       		// 2.2 监听“分享到朋友圈”自定义分享内容及分享结果接口
+	       		wx.onMenuShareTimeline({
+	       			title: '我是小明星',
+	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+	       		    link: '<%=request.getContextPath()%>/prefer/p2/p2.jsp',
+	       		    imgUrl: '<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+	       		    trigger: function (res) {
+	       		      //alert('用户点击分享到朋友圈');
+	       		    },
+	       		    success: function (res) {
+	       		      //alert('已分享');
+	       		    },
+	       		    cancel: function (res) {
+	       		      //alert('已取消');
+	       		    },
+	       		    fail: function (res) {
+	       		      //alert(JSON.stringify(res));
+	       		    }
+	       		  });	       		
+	       	})	       
+	    }  
+	});
+}); 
+</script>
 </html>

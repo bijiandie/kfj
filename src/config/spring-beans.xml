@@ -31,5 +31,18 @@
 	<bean name="babyManager" parent="transactionProxy">
 		<property name="target" ref="babyManagerBase"></property>
 	</bean>	
+	
+	<!--wxUser列表  -->	
+	<bean id="wxUserDao" class="com.kfj.dao.WxUserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wxUserManagerBase" class="com.kfj.service.WxUserServiceImpl">
+		<property name="wxUserDao" ref="wxUserDao"></property>
+	</bean>
+
+	<bean name="wxUserManager" parent="transactionProxy">
+		<property name="target" ref="wxUserManagerBase"></property>
+	</bean>	
 
 </beans>

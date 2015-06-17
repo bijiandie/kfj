@@ -593,16 +593,34 @@ style.firebugResetStyles {
 		</div>
 
         <div class="pic-form left-form">
-
-	        <div class="item">
-	        	<img class="image" alt="${baby.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby.picture }">
-	        	<div class="txt">
-	        		<span class="no">No.${baby.csbh } ${baby.name }</span> 
-	        		<span class="votes">${baby.tps }票</span>
-	        	</div>
-	        	<a class="action" onclick="DoVote(1702)">点赞</a>
-	        </div>
+	        <c:if test="${!empty babyList1 }">
+	        	<c:forEach items="${babyList1 }" var="baby1">
+			        <div class="item">
+			        	<img class="image" alt="${baby1.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby1.picture }">
+			        	<div class="txt">
+			        		<span class="no">No.${baby1.csbh } ${baby1.name }</span> 
+			        		<span class="votes">${baby1.tps }票</span>
+			        	</div>
+			        	<a class="action" onclick="DoVote(1702)">点赞</a>
+			        </div>
+		        </c:forEach>
+		    </c:if>
         </div>
+               
+      <div class="pic-form right-form">
+        <c:if test="${!empty babyList2 }">
+	        	<c:forEach items="${babyList2 }" var="baby2">
+			        <div class="item">
+			        	<img class="image" alt="${baby2.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby2.picture }">
+			        	<div class="txt">
+			        		<span class="no">No.${baby2.csbh } ${baby2.name }</span> 
+			        		<span class="votes">${baby2.tps }票</span>
+			        	</div>
+			        	<a class="action" onclick="DoVote(1702)">点赞</a>
+			        </div>
+		        </c:forEach>
+		    </c:if>
+      </div>
         <div style="padding-bottom: 80px; float: left; clear: both; width: 100%;">
             <!-- <p class="pager"><a>1/166页 </a><a href="" class="itm">下一页</a></p> -->
         </div>

@@ -1,5 +1,6 @@
 package com.kfj.control;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -171,16 +172,39 @@ public class BabyController {
 	}
 	
 	@RequestMapping("/getBabyByCsbh")
-	public String getBabyByCsbh(HttpServletRequest request){
+	public String getBabyByCsbh(HttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("utf-8");
 		List<Baby> entityList = babyManager.getAllBaby();
-		List<Baby> babyList = babyManager.getAllBabyByTps();
+		//List<Baby> babyList = babyManager.getAllBabyByTps();
 		int ljtp = babyManager.getLjtp();
 		int cyrs = entityList.size();
 		String csbh = request.getParameter("csbh");
-		Baby baby = babyManager.getBabyByCsbh(csbh);
-		request.setAttribute("baby", baby);		
+		csbh = new String(csbh.getBytes("ISO-8859-1"),"utf-8");
+		List<Baby> babyList = babyManager.getBabyByCsbh(csbh);
+		if(babyList.size()<=0){
+			babyList = babyManager.getBabyByBbxm(csbh);
+		}
+		List<Baby> babyList1 = new ArrayList<Baby>();
+		List<Baby> babyList2 = new ArrayList<Baby>();
+		for(int i=0;i<babyList.size();i=i+2){
+			babyList1.add(babyList.get(i));
+			if(i<babyList.size()-1){
+				babyList2.add(babyList.get(i+1));
+			}
+		}
+		request.setAttribute("babyList1", babyList1);	
+		request.setAttribute("babyList2", babyList2);
 		request.setAttribute("cyrs", cyrs);	
 		request.setAttribute("ljtp", ljtp);	
 		return "/prefer/tp1/tp11";	
+	}
+	@RequestMapping("/getBabyById")
+	public String getBabyById(HttpServletRequest request) throws Exception{
+		String csbh = request.getParameter("csbh");
+		List<Baby> babyList = babyManager.getBabyByCsbh(csbh);
+		Baby baby = new Baby();
+		baby = babyList.get(0);
+		request.setAttribute("baby", baby);	
+		return "/prefer/tp2/tp2";
 	}
 }

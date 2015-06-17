@@ -598,16 +598,19 @@ style.firebugResetStyles {
         <a>${currentPage+1}/${pageCount}页 </a>
         <c:if test="${(currentPage+1) != pageCount}">
         	<a href='<%=request.getContextPath()%>/baby/getAllBabyList?currentPage=${currentPage+1}' class="itm">下一页</a>
-        </p>
         </c:if>
+        </p>
+       
         <div class="pic-form left-form">
-	        <c:if test="${!empty babyList2 }">
-	        	<c:forEach items="${babyList2 }" var="baby2">
+	        <c:if test="${!empty babyList1 }">
+	        	<c:forEach items="${babyList1 }" var="baby1">
 			        <div class="item">
-			        	<img class="image" alt="${baby2.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby2.picture }">
+			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby1.csbh }' class="itm">
+			        	<img class="image" alt="${baby1.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby1.picture }">
+			        </a>	
 			        	<div class="txt">
-			        		<span class="no">No.${baby2.csbh } ${baby2.name }</span> 
-			        		<span class="votes">${baby2.tps }票</span>
+			        		<span class="no">No.${baby1.csbh } ${baby1.name }</span> 
+			        		<span class="votes">${baby1.tps }票</span>
 			        	</div>
 			        	<a class="action" onclick="DoVote(1702)">点赞</a>
 			        </div>
@@ -616,13 +619,15 @@ style.firebugResetStyles {
         </div>
                
       <div class="pic-form right-form">
-        <c:if test="${!empty babyList1 }">
-	        	<c:forEach items="${babyList1 }" var="baby1">
+        <c:if test="${!empty babyList2 }">
+	        	<c:forEach items="${babyList2 }" var="baby2">
 			        <div class="item">
-			        	<img class="image" alt="${baby1.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby1.picture }">
+			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby2.csbh }' class="itm">
+			        	<img class="image" alt="${baby2.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby2.picture }">
+			        </a>
 			        	<div class="txt">
-			        		<span class="no">No.${baby1.csbh } ${baby1.name }</span> 
-			        		<span class="votes">${baby1.tps }票</span>
+			        		<span class="no">No.${baby2.csbh } ${baby2.name }</span> 
+			        		<span class="votes">${baby2.tps }票</span>
 			        	</div>
 			        	<a class="action" onclick="DoVote(1702)">点赞</a>
 			        </div>
@@ -821,7 +826,6 @@ style.firebugResetStyles {
 
         function DoSearch() {
             var csbh = $("#txtSearch").val();
-            alert(csbh);
             if (csbh != "") {
                 window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh;
             }
