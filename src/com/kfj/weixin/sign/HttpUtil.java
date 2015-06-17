@@ -32,4 +32,12 @@ public class HttpUtil {
 		return result;
 	}
 	
+	 public static int getPageCount(int recordCount,int pageSize){ 
+         int size = recordCount/pageSize;//总条数/每页显示的条数=总页数 
+         int mod = recordCount % pageSize;//最后一页的条数 
+         if(mod != 0) 
+             size++; 
+         return recordCount == 0 ? 1 : size; 
+     }
+	
 }

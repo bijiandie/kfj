@@ -8,20 +8,34 @@ import com.kfj.entity.Baby;
 public interface BabyService {
 	
 	/**
-	 * TODO µÃµ½ËùÓÐµÄbaby
+	 * TODO ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½baby
 	 * @return
 	 */
 	public List<Baby> getAllBaby();
 	
 	/**
-	 * TODO ÐÂÔöbaby
+	 * TODO ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½baby
+	 * @return
+	 */
+	public List<Baby> getAllBabyByTps(int firstResult,int maxResults);
+	
+	/**
+	 * TODO ï¿½ï¿½ï¿½ï¿½baby
 	 * @param baby
 	 */
 	public void addBaby(Baby baby);
 	/**
-	 * TODO ¸üÐÂbaby
+	 * TODO ï¿½ï¿½ï¿½ï¿½baby
 	 * @param user
 	 * @return
 	 */
 	public boolean updateBaby(Baby baby);
+	/**
+	 * TODO å¾—åˆ°ç´¯ç§¯æŠ•ç¥¨
+	 * @param 
+	 * @return
+	 */
+	public int getLjtp();
+	public List<Baby> getAllBabyByTps();
+	public Baby getBabyByCsbh(String csbh);
 }

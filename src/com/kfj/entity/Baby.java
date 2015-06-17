@@ -5,45 +5,49 @@ public class Baby {
 
 	private int id;
 	/**
-	 * ²ÎÈü±àºÅ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String csbh;
 	/**
-	 * ÐÕÃû
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String name;
 	/**
-	 * ÐÔ±ð
+	 * ï¿½Ô±ï¿½
 	 */
 	private String sex;
 	/**
-	 * ÄêÁä
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String age;
 	/**
-	 * ÁªÏµµç»°
+	 * jÏµï¿½ç»°
 	 */
 	private String phone;
 	/**
-	 * ÒµÎñÔ±´úÂë
+	 * Òµï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String ywydm;
 	/**
-	 * ÕÕÆ¬
+	 * ï¿½ï¿½Æ¬
 	 */
 	private String picture;
 	/**
-	 * ²ÎÈü²ÅÒÕ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String talent;
 	/**
-	 * ³É³¤¼ÄÓï
+	 * ï¿½É³ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String czjy;
 	/**
-	 * Í¶Æ±Êý
+	 * Í¶Æ±ï¿½ï¿½
 	 */
-	private String tps;
+	private int tps;
+	/**
+	 * Í¶Æ±ï¿½ï¿½
+	 */
+	private String jzxm;
 	public int getId() {
 		return id;
 	}
@@ -104,11 +108,20 @@ public class Baby {
 	public void setCzjy(String czjy) {
 		this.czjy = czjy;
 	}
-	public String getTps() {
+	
+	public int getTps() {
 		return tps;
 	}
-	public void setTps(String tps) {
+	public void setTps(int tps) {
 		this.tps = tps;
 	}
+	public String getJzxm() {
+		return jzxm;
+	}
+	public void setJzxm(String jzxm) {
+		this.jzxm = jzxm;
+	}
+
+	
 	
 }

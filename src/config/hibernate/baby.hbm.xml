@@ -16,7 +16,8 @@
         <property name="picture" type="java.lang.String" column="picture"/>  
         <property name="talent" type="java.lang.String" column="talent"/>  
         <property name="czjy" type="java.lang.String" column="czjy"/>  
-        <property name="tps" type="java.lang.Integer" column="tps"/>         
+        <property name="tps" type="java.lang.Integer" column="tps"/>   
+        <property name="jzxm" type="java.lang.String" column="jzxm"/>       
     </class>
 
 </hibernate-mapping>

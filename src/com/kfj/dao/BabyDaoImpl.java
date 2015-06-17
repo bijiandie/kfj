@@ -16,11 +16,25 @@ public class BabyDaoImpl implements BabyDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Baby> getAllBaby() {
 		String hql = "from Baby order by id DESC";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		
+		return query.list();
+	}
+	
+	public List<Baby> getAllBabyByTps(int firstResult,int maxResults){
+		String hql = "from Baby order by tps DESC";	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setMaxResults(maxResults);  
+		query.setFirstResult(firstResult); 
+		return query.list();
+	}
+	
+	public List<Baby> getAllBabyByTps(){
+		String hql = "from Baby order by tps DESC";	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 
@@ -39,5 +53,23 @@ public class BabyDaoImpl implements BabyDao {
 		return (query.executeUpdate() > 0);
 	}
 
+	@Override
+	public int getLjtp(){
+		String hql = "select sum(tps) as tps from Baby";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List ljtpList = query.list();
+		int tps = 0;
+		if(ljtpList.get(0) != null){
+			tps = Integer.parseInt(String.valueOf(ljtpList.get(0)));
+		}
+		return tps;
+	}
+	
+	public Baby getBabyByCsbh(String csbh){
+		String hql = "from Baby where csbh = "+csbh;	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return (Baby) query.list().get(0);
+	}
 	
 }

@@ -6,7 +6,7 @@
         <title>平安E服务——我是小明星</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/prefer/p4/style/style.css" />
         <style type="text/css">
         wx.onMenuShareTimeline({
 	    title: 'aa', // 分享标题

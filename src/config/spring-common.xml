@@ -15,9 +15,10 @@
 	</bean> -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://112.124.49.19:3306/wsxmx?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/kfj?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
-        <property name="password" value="VhhxZqTnBjdFfuQz"/>
+        <!-- <property name="password" value="VhhxZqTnBjdFfuQz"/> -->
+        <property name="password" value="123456"/>
 	</bean>
 	
 	<!-- 配置SessionFactory -->
@@ -27,7 +28,8 @@
     		<list><!-- 以下用来列出Hibernate映射文件 -->  
         		<value>config/hibernate/user.hbm.xml</value>
         		<value>config/hibernate/baby.hbm.xml</value>  
-    		</list>  
+         		<value>config/hibernate/wxuser.hbm.xml</value>  
+     		</list>  
     	</property> 
 		
 		<property name="hibernateProperties">

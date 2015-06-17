@@ -1,8 +1,11 @@
 eclipse.preferences.version=1
 encoding//WebContent/prefer/p2/p2.jsp=UTF-8
+encoding//WebContent/prefer/p2/style/style.css=UTF-8
 encoding//WebContent/prefer/p2/style/style1.css=UTF-8
 encoding//WebContent/prefer/p3/500.jsp=UTF-8
 encoding//WebContent/prefer/p3/p3.jsp=UTF-8
 encoding//WebContent/prefer/p3/style/style.css=UTF-8
+encoding//WebContent/prefer/tp2/tp2.jsp=UTF-8
 encoding//src/com/kfj/control/BabyController.java=UTF-8
+encoding//src/com/kfj/control/WXController.java=UTF-8
 encoding/<project>=UTF-8

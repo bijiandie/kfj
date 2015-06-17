@@ -1,9 +1,5 @@
 package com.kfj.control;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
 import com.alibaba.fastjson.JSONObject;
+import com.kfj.weixin.sign.WXAccessService;
 import com.kfj.weixin.sign.WeChat;
 import com.kfj.weixin.sign.WxSign;
 
@@ -24,6 +20,7 @@ public class WXController {
 	@RequestMapping(method = {RequestMethod.GET})
 	public void wxGet(HttpServletRequest request, HttpServletResponse response){
 		try {
+			WXAccessService wxAccessService = new WXAccessService();
 			// 微信签名
 			String signature = request.getParameter("signature");
 			// 时间戳
@@ -33,7 +30,10 @@ public class WXController {
 			// 随机字符串
 			String echostr = request.getParameter("echostr");
 			System.out.println(signature+","+timestamp+","+nonce+","+echostr);
-			response.getWriter().write(echostr);
+			String verifyRes = wxAccessService.handleVerifyReq(signature,
+					timestamp, nonce, echostr);
+			// response.getWriter().write(verifyRes);
+			response.getWriter().write(verifyRes);
 			response.flushBuffer();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -59,8 +59,5 @@ public class WXController {
 			ex.printStackTrace();
 		}
 		return result;
-	}
-	
-	
-	
+	}	
 }

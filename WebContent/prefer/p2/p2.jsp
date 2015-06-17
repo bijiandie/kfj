@@ -39,6 +39,11 @@
 					return false;
 					}				
 			}
+		if(document.getElementById('jzxm').value==''){
+			document.getElementById ("bdnr").innerHTML="家长姓名不能为空！";
+        	document.getElementById("bar").style.display="";
+			return false;
+			}
 		/* if(document.getElementById('phone').value==''){
 			document.getElementById ("bdnr").innerHTML="联系电话不能为空！";
         	document.getElementById("bar").style.display="";
@@ -76,6 +81,8 @@
         	document.getElementById("bar").style.display="";
 			   return false;
 			}
+		document.getElementById("a1").style.display="none";
+		document.getElementById("a2").style.display="";
 		var form = document.forms[0];
 		form.submit();
 	}
@@ -119,9 +126,14 @@
 							  <option value="10">10</option>
 							  <option value="11">11</option>
 							  <option value="12">12</option>
+							   <option value="13">13</option>
+							  <option value="14">14</option>
+							   <option value="15">15</option>
 							</select>
 						</div>
 					</li>
+					<li><div class="left"><span>*</span>家长姓名&nbsp;</div><div class="right"><input id="jzxm" type="text" name="jzxm" placeholder="必填" /></div></li>
+					<li><div class="left"><span></span>&nbsp;</div><div class="right" style="font-size:12px;color:red">请保持与平安APP预报名信息一致</div></li>
 <!-- 					<li><div class="left"><span>*</span>宝 贝 电 话&nbsp;</div><div class="right"><input id="phone" type="text" name="phone" placeholder="必填" /></div></li>
  -->                    <li><div class="left"><span>*</span>业务员代码&nbsp;</div><div class="right"><input id="ywydm" type="text" name="ywydm" placeholder="必填" /></div></li>
                     <li><div class="left"><span>*</span>宝 贝 照 片&nbsp;</div><div class="right"><input id="picture" type="file" name="picture" accept="image/*;capture=camera"/></div></li>
@@ -131,7 +143,8 @@
                 </ul>
             </div>
             <div>
-             <a javascript:void(0)" onclick="ljbm()"><img src='style/p2_04.png' /></a></div>
+            <div id="a1" > <a javascript:void(0)" onclick="ljbm()"><img src='style/p2_04.png' /></a></div>
+            <div id="a2" style="display:none"> <img src='style/p2_04.png' /></div>
             </form>
         </div>
     </body>

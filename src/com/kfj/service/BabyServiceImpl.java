@@ -15,12 +15,16 @@ public class BabyServiceImpl implements BabyService {
 	}
 
 	/**
-	 * TODO µÃµ½ËùÓÐµÄbaby
+	 * TODO ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½baby
 	 * @return
 	 */
 	@Override
 	public List<Baby> getAllBaby() {
 		return babyDao.getAllBaby();
+	}
+	
+	public List<Baby> getAllBabyByTps(int firstResult,int maxResults){
+		return babyDao.getAllBabyByTps(firstResult,maxResults);
 	}
 
 	@Override
@@ -28,12 +32,24 @@ public class BabyServiceImpl implements BabyService {
 		babyDao.addBaby(baby);
 		
 	}
+	
+	@Override
+	public int getLjtp(){
+		return babyDao.getLjtp();
+	}
 
 	@Override
 	public boolean updateBaby(Baby baby) {
 		return babyDao.updateBaby(baby);
 	}
+	@Override
+	public List<Baby> getAllBabyByTps(){
+		return babyDao.getAllBabyByTps();
+	}
 
-
+	@Override
+	public Baby getBabyByCsbh(String csbh){
+		return babyDao.getBabyByCsbh(csbh);
+	}
 	
 }
