@@ -1,0 +1,434 @@
+﻿
+.ul-list
+{
+    padding-left:24px;
+    font-size:16px;
+}
+.news-list li 
+{
+    line-height: 40px;
+    position: relative;
+    list-style:none;
+}
+.news-list li .link
+{
+    max-width: 85%;
+}
+.news-list li .date 
+{
+    color: #9a9a9a;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.related 
+{
+    clear:both;
+    margin:10px;
+}
+.related .title .icon 
+{
+    background-position: 0 0;
+    width: 6px;
+    height: 12px;
+    margin-right:8px;
+}
+.related .news-list li 
+{
+    padding:5px;
+    border-bottom: 1px solid #e1e1e1;
+}
+.related .news-list li:last-child 
+{
+    border-bottom: none;
+}
+.related .news-list .link
+{
+    max-width: 95%;
+}
+.related .moreinfos 
+{
+    display: block;
+    width: 90%;
+    height: 38px;
+    border: 1px solid #d1d1d1;
+    border-radius: 20px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 16px;
+    margin: 10px auto 5px auto;
+    color:#000;
+    text-decoration:none;
+}
+.related .moreinfos:active 
+{
+    background: #E1EECA;
+}
+
+.share 
+{
+    position:relative;
+    margin: 10px;
+    font-size: 16px;
+    height:40px;
+}
+.share .btn 
+{
+    position:absolute;
+    width: 48%;
+    background: #fff;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    left:0px;
+}
+.share .btn i.icon 
+{
+    width: 30px;
+    height:28px;
+    margin-right:8px;
+    margin-left: -4px;
+}
+.share .btn-1 .icon 
+{
+    background-position: 0 -45px;
+    width: 31px;
+    height: 25px;
+}
+.share .btn-2 .icon 
+{
+    background-position: -39px -46px;
+    width: 26px;
+    height: 26px;
+}
+.share .btn-2 
+{
+    left:auto;
+    right:0px;
+}
+
+.summary
+{
+    line-height:20px; padding:16px 4px 0px 4px;
+}
+
+.sign-up
+{
+    display:block;
+    height:40px;
+    background:#54a6bc;
+    color:#fff;
+    text-align:center;
+    margin:10px 10px 0px 10px;
+    line-height:40px;
+}
+.register
+{
+    background:#f90;
+    margin-bottom:20px;
+}
+.sign-up .btn
+{
+    display:inline-block;
+    line-height:40px;
+    color:#fff;
+    padding-left:32px;
+    background:url(/assets/phone/btn-sign.png) no-repeat 0px center;
+    text-decoration:none;
+}
+
+.tel-go
+{
+    height:40px;
+    margin:10px 10px 0px 10px;
+    padding:0px 10px 0px 50px;
+    background:url(/assets/phone/btn-sign.png) no-repeat 10px center #8ed6ea;
+}
+.tel-go .btn
+{
+    display:block;
+    line-height:40px;
+    color:#333;
+    text-decoration:none;
+}
+
+.tab
+{
+    margin: 10px;
+    height: 64px;
+    position: relative;
+}
+.tab .b
+{
+    display: block;
+    width: 48%;
+    height: 64px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-decoration:none;
+}
+.tab .online
+{
+    float: right;
+}
+.tab .cur
+{
+    background: url(/assets/phone/bg-tab-cur.png) no-repeat center -10px;
+}
+.tab .b .bg
+{
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+}
+.tab .b .bd
+{
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    z-index: 2;
+    visibility: visible;
+}
+.tab .qa .q
+{
+    padding-left: 22px;
+    background: url(/assets/phone/ico-qa.png) no-repeat left center;
+}
+.tab .online .l
+{
+    padding-left: 30px;
+    background: url(/assets/phone/ico-ask.png) no-repeat left 1px;
+}
+.tab .cur .bg
+{
+    background: #00308c;
+}
+.tab .cur .bd
+{
+    color: #fff;
+}
+.tab .cur .q
+{
+    background: url(/assets/phone/ico-qa-c.png) no-repeat left center;
+}
+.tab .cur .l
+{
+    background: url(/assets/phone/ico-ask-c.png) no-repeat left 1px;
+}
+
+.process-title
+{
+     text-align:center;
+     font-size:16px;
+     font-weight:bold;
+     padding-bottom:10px;
+     border-bottom:1px solid #ccc; 
+}
+
+.process-itm-title
+{
+    background:#bddde6;
+    line-height:40px;
+    position:relative;
+    padding-left:50px;
+    color:#2366b8;
+    font-weight:bold;
+}
+.process-itm-title .no
+{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 10px;
+    top: 5px;
+    border-radius: 15px 15px 15px 15px;
+    background: #2f7bd8;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    font-family: Arial;
+}
+.process-step p.step
+{
+    display: block;
+    position: relative;
+    background:url(/assets/phone/bslc-arrow.png) no-repeat center bottom;
+    text-decoration:none;
+    color:#111;
+    padding-bottom:30px;    
+    margin-top:10px;
+    line-height:28px;
+}
+.process-step .step .item
+{
+    display: block;
+    position: relative;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 10px 10px 10px 50px;
+    text-decoration:none;
+    color:#111;
+}
+.process-step .step .item .no
+{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 10px;
+    top: 8px;
+    border-radius: 15px 15px 15px 15px;
+    background: #CFAF7A;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    font-family: Arial;
+}
+.process-step .step .item:active
+{
+    background: #0f418c;
+    color:#fff;
+}
+.process-step .step .item:active .no
+{
+    background: #fff;
+    color: #0f418c;
+}
+.process-step .step:last-child
+{
+    padding-bottom:20px;
+    background:none;
+}
+
+.sharetip {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2000;
+}
+
+.sharetip .mask {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.sharetip .ico {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 231px;
+    height: 161px;
+    background: url("/assets/phone/share@2x.png") center center no-repeat;
+    background-size: 231px 161px;
+    z-index: 2001;
+}
+
+.news-list-itm
+{
+    position:relative;
+    height:40px;
+    border-bottom:1px solid #e1e1e1;
+}
+.news-list-itm .t
+{
+    position:absolute;
+    height:40px;
+    line-height:40px;
+    top:0px;
+    left:0px;
+    right:50px;
+    overflow:hidden;
+    white-space:nowrap;
+    padding-left:18px;
+    text-overflow:ellipsis;
+}
+.news-list-itm .t .no
+{
+    position:absolute;
+    left:0px;
+    top:15px;
+    border-radius:12px;
+    background:#5B251E;
+    display:block;
+    width:10px;
+    height:10px;
+}
+.news-list-itm .d
+{
+    position:absolute;
+    height:40px;
+    line-height:40px;
+    width:45px;
+    right:0px;
+    top:0px;
+    color:#b9b9b9;
+}
+.news-list-itm:last-child
+{
+    border-bottom:none;
+}
+.news-list-itm-more
+{
+     text-align:center;
+     color:#999999;
+}
+
+.contact-map
+{
+    width:100%;
+}
+.contact p
+{
+    color:#a0a0a0;
+}
+.contact .title
+{
+    font-size:20px;
+}
+.contact .adr
+{
+    line-height:20px;
+    margin-bottom:10px;
+}
+.contact .tel a
+{
+    line-height:20px;
+    color:#47800e;
+    font-weight:bold;
+    text-decoration:none;
+}
+.contact .btn-tel
+{
+    border-radius:8px;
+    /*background:#014da1;*/
+    background:#5B251E;
+    text-align:center;
+    padding:8px 0px 8px 0px;
+    margin-top:20px;
+}
+.contact .btn-tel a
+{
+     background:url(/assets/phone/contact-tel-bg.png) 0px 5px no-repeat;
+     color:#ffffff;
+     font-weight:bold;
+     text-decoration:none;
+     font-size:22px;
+     line-height:30px;
+     padding:5px 0px 5px 38px;
+}
+.contact .btn-nav a
+{
+     background:url(/assets/phone/nav-bg.png) 0px 1px no-repeat;
+}
