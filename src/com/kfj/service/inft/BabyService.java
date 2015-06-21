@@ -53,4 +53,10 @@ public interface BabyService {
 	 * @return
 	 */
 	public List<Baby> getBabyByBbxm(String bbxm);
+	/**
+	 * TODO 投票
+	 * @param user
+	 * @return
+	 */
+	public boolean updateBabyTps(Baby baby);
 }

@@ -819,33 +819,87 @@ style.firebugResetStyles {
             $(".search").hide();
         }
     </script>
-    <script type="text/javascript">
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wxa659e0abe551a319', // 必填，公众号的唯一标识
-            timestamp:20150609092304 , // 必填，生成签名的时间戳
-            nonceStr: "werosdfeljfowjefjwef", // 必填，生成签名的随机串
-            signature: "df6dd664870b695d9770b8896fe4867c7c8b585c",// 必填，签名，见附录1
-            jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-
-        wx.ready(function(){
-            var shareData = {
-			    title: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    desc: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    link: "http://wxvote01.ku.com.cn/phone/vote/default.aspx?id=1",
-			    imgUrl: "http://wxvote01.ku.com.cn/assets/logo.jpg"
-			};
-            var shareData1 = {
-			    title: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    desc: "赶紧登陆“杭州综合频道”微信公众平台。点击萌笑宝贝，晒出萌宝微笑，赢取apple watch啦！",
-			    link: "http://wxvote01.ku.com.cn/phone/vote/default.aspx?id=1",
-			    imgUrl: "http://wxvote01.ku.com.cn/assets/logo.jpg"
-			};
-
-			wx.onMenuShareAppMessage(shareData1);
-			wx.onMenuShareTimeline(shareData);
-        });
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    	var url = location.href.split('#')[0];
+    	//url='http://yrweixin2.hundsun.cn/kfj/baby/getAllBabyList';
+    	$.ajax({
+    		type: 'POST',
+    		url:'<%=request.getContextPath()%>/WXController/getSingInfo',
+			data:{ url: url },
+			datatype:"json",     
+    	    error:function(){     
+    	       alert('error');
+    	    },     
+    	    success:function(data){
+    	       data=eval("("+data+")");//转换为json对象
+    	       var appid = data.appid;
+    	       var timestamp = data.timestamp;
+    	       var nonceStr = data.nonceStr;
+    	       var signature = data.signature;
+    	       var domain = data.domain;
+    	       //注册事件
+    	       wx.config({
+    	    	    debug: false,
+    	    	    appId: appid,
+    	    	    timestamp: timestamp,
+    	    	    nonceStr: nonceStr,
+    	    	    signature: signature,
+    	    	    jsApiList: [
+    	    	      'checkJsApi',
+    	    	      'onMenuShareTimeline',
+    	    	      'onMenuShareAppMessage'
+    	    	    ]
+    	    	});
+    	       
+    	       	wx.error(function (res) {
+    	    		//alert(res.errMsg);
+    	    	});
+    	       
+    	       	wx.ready(function () {
+    	       		wx.onMenuShareAppMessage({
+    	       		    title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		    link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+    	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击发送给朋友');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       		wx.onMenuShareTimeline({
+    	       			title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		 	link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+ 	       		    	imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击分享到朋友圈');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       	});   	       
+    	    }  
+    	});
+    });
     </script>
 </body>
 </html>

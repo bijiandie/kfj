@@ -55,5 +55,8 @@ public class BabyServiceImpl implements BabyService {
 	public List<Baby> getBabyByBbxm(String bbxm){
 		return babyDao.getBabyByBbxm(bbxm);
 	}
-	
+	@Override
+	public boolean updateBabyTps(Baby baby){
+		return babyDao.updateBabyTps(baby);
+	}
 }

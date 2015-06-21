@@ -1,5 +1,7 @@
 package com.kfj.control;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +11,9 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kfj.entity.Baby;
+import com.kfj.entity.WxUser;
 import com.kfj.service.inft.BabyService;
+import com.kfj.service.inft.WxUserService;
 import com.kfj.util.Config;
 import com.kfj.util.ImgCompress;
-import com.kfj.util.PageUtil;
 import com.kfj.weixin.sign.HttpUtil;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -34,6 +40,8 @@ public class BabyController {
 
 	@Resource(name="babyManager")
 	private BabyService babyManager;
+	@Resource(name="wxUserManager")
+	private WxUserService wxUserManager;
 		
 	/**
 	 * TODO �г�baby
@@ -133,6 +141,7 @@ public class BabyController {
 	@RequestMapping("/getAllBabyList")
 	public String getAllBabyList(HttpServletRequest request){
 		String currentPage = request.getParameter("currentPage");//当前页面 
+		String openId = request.getParameter("openId");
 		List<Baby> entityList = babyManager.getAllBaby();
 		int recordCount = entityList.size();//总共的条数 
 		int  currentPage1 = 0;//当前页面 
@@ -155,6 +164,7 @@ public class BabyController {
 				babyList2.add(babyList.get(i+1));
 			}
 		}
+		request.setAttribute("openId", openId);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("currentPage", currentPage1);	
 		request.setAttribute("cyrs", cyrs);	
@@ -165,15 +175,33 @@ public class BabyController {
 		return "/prefer/tp1/tp1";
 	}
 	
-	@ResponseBody
 	@RequestMapping("/getAllBabyRank")
-	public List<Baby> getAllBabyRank(HttpServletRequest request){		
-		return babyManager.getAllBabyByTps();	
+	public void  getAllBabyRank(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{		
+		request.setCharacterEncoding("utf-8");  //这里不设置编码会有乱码
+        response.setContentType("text/html;charset=utf-8");
+        response.setHeader("Cache-Control", "no-cache");  
+		List<Baby> babyList = babyManager.getAllBabyByTps();
+		for(int i=0;i<babyList.size();i++){
+			babyList.get(i).setNum(i+1);
+		}
+		String json = JSONArray.fromObject(babyList).toString();
+		PrintWriter out = null;  
+	    try {  
+	        out = response.getWriter();
+	        out.append(json);  
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    } finally {  
+	        if (out != null) {  
+	            out.close();  
+	        }  
+	    }  
 	}
 	
 	@RequestMapping("/getBabyByCsbh")
 	public String getBabyByCsbh(HttpServletRequest request) throws Exception{
 		request.setCharacterEncoding("utf-8");
+		String openId = request.getParameter("openId");
 		List<Baby> entityList = babyManager.getAllBaby();
 		//List<Baby> babyList = babyManager.getAllBabyByTps();
 		int ljtp = babyManager.getLjtp();
@@ -192,19 +220,44 @@ public class BabyController {
 				babyList2.add(babyList.get(i+1));
 			}
 		}
+		request.setAttribute("openId", openId);
+		request.setAttribute("flage", 1);
 		request.setAttribute("babyList1", babyList1);	
 		request.setAttribute("babyList2", babyList2);
 		request.setAttribute("cyrs", cyrs);	
 		request.setAttribute("ljtp", ljtp);	
-		return "/prefer/tp1/tp11";	
+		return "/prefer/tp1/tp1";	
 	}
 	@RequestMapping("/getBabyById")
 	public String getBabyById(HttpServletRequest request) throws Exception{
 		String csbh = request.getParameter("csbh");
+		String openId = request.getParameter("openId");
 		List<Baby> babyList = babyManager.getBabyByCsbh(csbh);
 		Baby baby = new Baby();
 		baby = babyList.get(0);
 		request.setAttribute("baby", baby);	
+		request.setAttribute("openId", openId);
 		return "/prefer/tp2/tp2";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/tpBaby")
+	public String tpBaby(HttpServletRequest request) throws Exception{
+		String csbh = request.getParameter("csbh");
+		String openId = request.getParameter("openId");
+		List<Baby> BabyList = babyManager.getBabyByCsbh(csbh);
+		List<WxUser> wxUserList = wxUserManager.getWxUserByOpenId(openId);
+		Baby baby = BabyList.get(0);
+		WxUser wxUser = wxUserList.get(0);
+		int tps = baby.getTps();
+		if(!Config.TPSTATE_1.equals(wxUser.getTpstate())){
+			tps = baby.getTps()+1;
+			baby.setTps(baby.getTps()+1);//投票
+			babyManager.updateBabyTps(baby);
+			wxUser.setTpstate(Config.TPSTATE_1);
+			wxUserManager.updateWxUserTpState(wxUser);			
+		}
+        return String.valueOf(tps);
+	}
+	
 }

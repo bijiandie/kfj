@@ -12,8 +12,8 @@ public class WeChat {
 	public static final String APPID = "wxa4cfcc5db1ec69c6";
 	private static final String APPSECRET = "fe43c7171eb50e880b1e6bc60d087fb0";*/
 	public static final String DOMAIN = "http://Yrweixin2.hundsun.cn/";
-	public static final String APPID = "wx6c3d1f2a4ba773c0";
-	private static final String APPSECRET = "110cbd567f89d9c83e0e4dc40761100e";
+	public static final String APPID = "wx5596f03a61a6da1b";
+	private static final String APPSECRET = "c38073e344d62d9e4cdbae02bd817590";
 	private static final String ACCESSTOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
     private static final String PAYFEEDBACK_URL = "https://api.weixin.qq.com/payfeedback/update";
     

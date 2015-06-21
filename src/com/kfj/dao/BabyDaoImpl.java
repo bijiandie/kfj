@@ -78,4 +78,12 @@ public class BabyDaoImpl implements BabyDao {
 		return query.list();
 	}
 	
+	public boolean updateBabyTps(Baby baby){
+		String hql = "update Baby b set b.tps = ? where b.id = ?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setInteger(0, baby.getTps());
+		query.setInteger(1, baby.getId());		
+		return (query.executeUpdate() > 0);
+	}
+	
 }

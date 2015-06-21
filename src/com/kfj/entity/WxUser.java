@@ -10,47 +10,47 @@ public class WxUser {
 	/**
 	 * 微信公众号标识
 	 */
-	private int OPENID;
+	private String OPENID;
 	/**
 	 * 关注状态(0未关注，1已关注，2取消关注)
 	 */
-	private int gzState;
+	private String gzState;
 	/**
 	 * 投票状态(0未投票，1已投票)
 	 */
-	private int tpstate;
+	private String tpstate;
 	/**
 	 * 投票时间
 	 */
-	private int tptime;
+	private String tptime;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getOPENID() {
+	public String getOPENID() {
 		return OPENID;
 	}
-	public void setOPENID(int oPENID) {
+	public void setOPENID(String oPENID) {
 		OPENID = oPENID;
 	}
-	public int getGzState() {
+	public String getGzState() {
 		return gzState;
 	}
-	public void setGzState(int gzState) {
+	public void setGzState(String gzState) {
 		this.gzState = gzState;
 	}
-	public int getTpstate() {
+	public String getTpstate() {
 		return tpstate;
 	}
-	public void setTpstate(int tpstate) {
+	public void setTpstate(String tpstate) {
 		this.tpstate = tpstate;
 	}
-	public int getTptime() {
+	public String getTptime() {
 		return tptime;
 	}
-	public void setTptime(int tptime) {
+	public void setTptime(String tptime) {
 		this.tptime = tptime;
 	}
 	

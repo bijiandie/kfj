@@ -48,6 +48,10 @@ public class Baby {
 	 * ͶƱ��
 	 */
 	private String jzxm;
+	/**
+	 * 排名
+	 */
+	private int num;
 	public int getId() {
 		return id;
 	}
@@ -121,6 +125,13 @@ public class Baby {
 	public void setJzxm(String jzxm) {
 		this.jzxm = jzxm;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+
 
 	
 	

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
@@ -565,6 +565,18 @@ style.firebugResetStyles {
     position: fixed !important;
     pointer-events: auto !important;
 }
+a:link {
+ text-decoration: none;
+}
+a:visited {
+ text-decoration: none;
+}
+a:hover {
+ text-decoration: none;
+}
+a:active {
+ text-decoration: none;
+}
 </style>
 <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/prototype.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/core.js"></script>
@@ -576,7 +588,7 @@ style.firebugResetStyles {
     <div id="PicForm" class="content">
         <img src="<%=request.getContextPath()%>/prefer/tp1/style/p1_01.jpg" id="imgTitle" alt="规则" style="width: 100%; height: auto">       
         <div class="control1">
-            <div class="action" onclick="DoJoin(this)" ext="0" id="btnJoin" style="background-color: rgb(57, 135, 71); font-size: 4vw; width: 96%;"> 我要报名</div>
+            <div class="action" ext="0" id="btnJoin" style="background-color: rgb(57, 135, 71); font-size: 4vw; width: 96%;"><a style="color:#FFFFFF;" href="<%=request.getContextPath()%>/prefer/p4/p4.jsp">我要报名</a></div>
         </div>
 		<div class="control1">
 			<div class="action" style="padding:4%;box-shadow: 2px 2px 1px #848484;">参赛选手</div>
@@ -589,15 +601,17 @@ style.firebugResetStyles {
             <span class="action" style="width: 33%; left: 67%">排行榜<br>${ljtp }</span>
         </div>
 		<div style="float:left;height:12vw;padding-top:6px;width:100%;margin-top: 4%;">
-			<div style="background: #fff none repeat scroll 0 0;border-radius: 8px;color: #000000;display: block;float: left;font-size: 4vw;padding: 2%;text-align: center;width: 90%;margin-left:3%;">快速查询</div>
+			<a href="javascript:void(0);" onclick="ShowSearch()"><div style="background: #fff none repeat scroll 0 0;border-radius: 8px;color: #000000;display: block;float: left;font-size: 4vw;padding: 2%;text-align: center;width: 90%;margin-left:3%;">快速查询</div></a>
 		</div>
         <p class="pager">
+        <c:if test="${(flage) != 1}">
         <c:if test="${(currentPage+1) != 1}">
-        	<a href='<%=request.getContextPath()%>/baby/getAllBabyList?currentPage=${currentPage-1}' class="itm">上一页</a>
+        	<a href='<%=request.getContextPath()%>/baby/getAllBabyList?currentPage=${currentPage-1}&openId=${openId }' class="itm">上一页</a>
         </c:if>
         <a>${currentPage+1}/${pageCount}页 </a>
         <c:if test="${(currentPage+1) != pageCount}">
-        	<a href='<%=request.getContextPath()%>/baby/getAllBabyList?currentPage=${currentPage+1}' class="itm">下一页</a>
+        	<a href='<%=request.getContextPath()%>/baby/getAllBabyList?currentPage=${currentPage+1}&openId=${openId }' class="itm">下一页</a>
+        </c:if>
         </c:if>
         </p>
        
@@ -605,14 +619,16 @@ style.firebugResetStyles {
 	        <c:if test="${!empty babyList1 }">
 	        	<c:forEach items="${babyList1 }" var="baby1">
 			        <div class="item">
-			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby1.csbh }' class="itm">
+			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby1.csbh }&openId=${openId }' class="itm">
 			        	<img class="image" alt="${baby1.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby1.picture }">
 			        </a>	
 			        	<div class="txt">
 			        		<span class="no">No.${baby1.csbh } ${baby1.name }</span> 
 			        		<span class="votes">${baby1.tps }票</span>
 			        	</div>
-			        	<a class="action" onclick="DoVote(1702)">点赞</a>
+   						<input type="hidden" id="openId" name="openId" value="${openId }"/>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.tps })">点赞</a>
+
 			        </div>
 		        </c:forEach>
 		    </c:if>
@@ -622,14 +638,16 @@ style.firebugResetStyles {
         <c:if test="${!empty babyList2 }">
 	        	<c:forEach items="${babyList2 }" var="baby2">
 			        <div class="item">
-			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby2.csbh }' class="itm">
+			        <a href='<%=request.getContextPath()%>/baby/getBabyById?csbh=${baby2.csbh }&openId=${openId }' class="itm">
 			        	<img class="image" alt="${baby2.name }" src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby2.picture }">
 			        </a>
 			        	<div class="txt">
 			        		<span class="no">No.${baby2.csbh } ${baby2.name }</span> 
 			        		<span class="votes">${baby2.tps }票</span>
 			        	</div>
-			        	<a class="action" onclick="DoVote(1702)">点赞</a>
+			        	<input type="hidden" id="csbh2" name="csbh2" value="${baby2.csbh }"/>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.tps })">点赞</a>
+
 			        </div>
 		        </c:forEach>
 		    </c:if>
@@ -643,7 +661,7 @@ style.firebugResetStyles {
         <img alt="" src="<%=request.getContextPath()%>/prefer/tp1/style/vote-bottom.png" style="width: 100%; height: auto">
         <a class="action" href="tel:0571-123456"></a>
         <a class="action" onclick="ShowSearch()" style="left: 33%; width: 34%;"></a>
-        <a class="action" onclick="ShowRank()" style="left: 67%;"></a>
+        <a class="action" href="javascript:void(0);" onclick="ShowRank()" style="left: 67%;"></a>
     </div>
     
     <div style="display: none;" class="search">
@@ -651,7 +669,7 @@ style.firebugResetStyles {
         <div>
             <input name="txtSearch" id="txtSearch" class="c" type="text">
         </div>
-        <a class="join" onclick="DoSearch()">搜 索</a>
+        <a class="join" href="javascript:void(0);" onclick="DoSearch()">搜 索</a>
     </div>
     
     <div class="rank" id="rank">
@@ -659,7 +677,8 @@ style.firebugResetStyles {
             <table class="rank-list" border="1" cellpadding="0" cellspacing="0" width="100%">
                 <tbody><tr>
                     <th>排名</th>
-                    <th>选手</th>
+                    <th>参赛编号</th>
+                    <th>宝贝姓名</th>
                     <th>得票数</th>
                 </tr>
                 </tbody>
@@ -687,13 +706,13 @@ style.firebugResetStyles {
     </div>
     <div class="other" id="other1">
         <div class="tip">如何投票：<br>
-            搜索微信公众号：杭州综合频道。添加关注，回复“宝贝”或点击界面下方的“萌笑宝贝”进入页面搜索萌宝姓名或编号，点击”亲一下“，即可为心目中的萌宝投票！
+            搜索微信公众号：闪耀浙分客服节。添加关注，点击界面下方的“我是小明星”进入页面搜索萌宝姓名或编号，点击”亲一下“，即可为心目中的萌宝投票！
             <a class="close" onclick="$('#other1').hide()">我知道了</a>
         </div>
     </div>
     <div class="other" id="other2">
-        <div class="tip">连接过期：<br>
-            当前链接已失效，请重新回复“宝贝”或点击界面下方的“萌笑宝贝”进入投票！
+        <div class="tip">您已参与投票！<br>
+            
             <a class="close" onclick="$('#other2').hide()">我知道了</a>
         </div>
     </div>
@@ -708,6 +727,7 @@ style.firebugResetStyles {
     <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/jquery.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/common.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/jweixin-1.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         var scrolling = false;
         var scrollTimer;
@@ -768,24 +788,25 @@ style.firebugResetStyles {
         }
 
         function ShowRank() {
-            loading.show();
-            Unibon.Web.Main.Phone.Vote.Default.GetRank(obj, function (rst) {
-                loading.hide();
-                $("#rank").show();
-                $.ajax({
-            	    url:'<%=request.getContextPath()%>/baby/getAllBabyRank',
-            	    type:'post',     
-            	    error:function(){    
-            	    	
-            	       alert('error');
-            	       alert(url);
-            	    },     
-            	    success:function(data){
-            	    	alert(data);
-            	    }
-                })
-                $("#rank-value").html(rst.value);
-            });
+        	$.ajax({
+				  type: 'POST',
+				  url:'<%=request.getContextPath()%>/baby/getAllBabyRank',
+				  datatype:"json",
+				  success:function(data){
+					  var dataObj=eval("("+data+")"); 
+					  var str = '';
+					  for(var i=0;i<dataObj.length;i++){ 	
+						  str = str+"<tr><td>"+dataObj[i].num+"</td><td>"+dataObj[i].csbh+"</td><td>"+dataObj[i].name+"</td><td>"+dataObj[i].tps+"</td></tr>";				       
+						     
+				        }  
+					  document.getElementById("rank-value").innerHTML = str;  
+				  },	
+				  //调用出错执行的函数
+		            error: function(){
+		                alert("error");
+		            }
+				}); 
+        	$("#rank").show();
 
         }
 
@@ -793,72 +814,129 @@ style.firebugResetStyles {
             $(".search").show();
         }
 
-        function DoVote(itemId) {
-            if (who != "") {
-                if (usign != "") {
-                    if ((typeof window.WeixinJSBridge != "undefined")) {
-                        $(".loading").show();
-                        Unibon.Web.Main.Phone.Vote.Default.DoLaud(who, obj, itemId, usign, function (rst) {
-                            $(".loading").hide();
-                            var rvote = JSON.parse(rst.value);
-                            VoteTip = rvote.msg;
-                            if (rvote.success > 0) {
-                                var laudO = $(".votes[itm='" + itemId + "']");
-                                var laud = parseInt(laudO.attr("val"));
-                                laud++;
-                                laudO.text(laud + "票").attr("val", laud);
-                                ShowAlert("谢谢您的投票！");
-                            } else {
-                                ShowAlert(rvote.msg);
-                            }
-                        });
-
-                    } else {
-                        ShowAlert("请在手机端完成投票！");
-                    }
-                } else {
-                    $("#other2").show();
-                }
-            } else {
-                $("#other1").show();
-            }
+        function DoVote(csbh,tps) {
+        	var openId = document.getElementById("openId").value; 
+        	alert(csbh);
+        	alert(tps);
+        	alert(openId);
+        	if(openId==''){
+            	$("#other1").show();
+        	}else{
+        		$.ajax({
+  				  type: 'POST',
+  				  url:'<%=request.getContextPath()%>/baby/tpBaby',
+  				  data:{ openId: openId, csbh: csbh },
+  				  datatype:"text",
+  				  success:function(data){
+  					 if(data==tps)
+  						 {
+  						  $("#other2").show();
+  						 }
+  					 $('.votes').html(data);
+  				  },	
+  				  //调用出错执行的函数
+  		            error: function(){
+  		                alert("error");
+  		            }
+  				});  
+        	}   	       	
         }
 
         function DoSearch() {
             var csbh = $("#txtSearch").val();
-            if (csbh != "") {
-                window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh;
+            var openId = $("#openId").val();
+            if (typeof(openId) != "undefined"){
+            	if (csbh != "") {
+                    window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh+"&openId="+openId;
+                }
+            }else{
+            	if (csbh != "") {
+                    window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh;
+                }
             }
             $(".search").hide();
         }
     </script>
     <script type="text/javascript">
-        wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: 'wxa659e0abe551a319', // 必填，公众号的唯一标识
-            timestamp:20150609092304 , // 必填，生成签名的时间戳
-            nonceStr: "werosdfeljfowjefjwef", // 必填，生成签名的随机串
-            signature: "df6dd664870b695d9770b8896fe4867c7c8b585c",// 必填，签名，见附录1
-            jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-
-        wx.ready(function(){
-            var shareData = {
-			    title: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    desc: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    link: "http://wxvote01.ku.com.cn/phone/vote/default.aspx?id=1",
-			    imgUrl: "http://wxvote01.ku.com.cn/assets/logo.jpg"
-			};
-            var shareData1 = {
-			    title: "家有萌宝的辣妈帅爹们，晒出萌宝微笑，赢取apple watch啦！",
-			    desc: "赶紧登陆“杭州综合频道”微信公众平台。点击萌笑宝贝，晒出萌宝微笑，赢取apple watch啦！",
-			    link: "http://wxvote01.ku.com.cn/phone/vote/default.aspx?id=1",
-			    imgUrl: "http://wxvote01.ku.com.cn/assets/logo.jpg"
-			};
-
-			wx.onMenuShareAppMessage(shareData1);
-			wx.onMenuShareTimeline(shareData);
-        });
+    $(document).ready(function(){
+    	var url = location.href.split('#')[0];
+    	//url='http://yrweixin2.hundsun.cn/kfj/baby/getAllBabyList';
+    	$.ajax({
+    		type: 'POST',
+    		url:'<%=request.getContextPath()%>/WXController/getSingInfo',
+			data:{ url: url },
+			datatype:"json",     
+    	    error:function(){     
+    	       alert('error');
+    	    },     
+    	    success:function(data){
+    	       data=eval("("+data+")");//转换为json对象
+    	       var appid = data.appid;
+    	       var timestamp = data.timestamp;
+    	       var nonceStr = data.nonceStr;
+    	       var signature = data.signature;
+    	       var domain = data.domain;
+    	       //注册事件
+    	       wx.config({
+    	    	    debug: false,
+    	    	    appId: appid,
+    	    	    timestamp: timestamp,
+    	    	    nonceStr: nonceStr,
+    	    	    signature: signature,
+    	    	    jsApiList: [
+    	    	      'checkJsApi',
+    	    	      'onMenuShareTimeline',
+    	    	      'onMenuShareAppMessage'
+    	    	    ]
+    	    	});
+    	       
+    	       	wx.error(function (res) {
+    	    		//alert(res.errMsg);
+    	    	});
+    	       
+    	       	wx.ready(function () {
+    	       		wx.onMenuShareAppMessage({
+    	       		    title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		    link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+    	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击发送给朋友');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       		wx.onMenuShareTimeline({
+    	       			title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		 	link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+ 	       		    	imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击分享到朋友圈');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       	});   	       
+    	    }  
+    	});
+    });
     </script>
 </body>
 </html>

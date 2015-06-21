@@ -142,6 +142,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    top: 0px;
 		    display: none;
 		}
+		.other
+        {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000000;
+            display: none;
+        }
+        .other .tip
+        {
+            position: absolute;
+            width: 80%;
+            height: auto;
+            padding: 4%;
+            left: 6%;
+            top: 100px;
+            background: #237a67;
+            border-radius: 8px 8px 8px 8px;
+            font-size: 18px;
+            color: #fff;
+        }
+        .other .close
+        {
+            display: block;
+            margin: 16px 10px 0px 10px;
+            background: #00aa67;
+            color: #fff;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 5px 5px 5px 5px;
+        }
     </style>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.7.1.js"></script>
     <script type="text/javascript">
@@ -155,6 +190,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         });
 	
 	     });
+		 function tp() {
+			var openId = document.getElementById("openId").value;
+			var csbh = document.getElementById("csbh").value;	
+			var tps = document.getElementById("tps").value;
+			$.ajax({
+				  type: 'POST',
+				  url:'<%=request.getContextPath()%>/baby/tpBaby',
+				  data:{ openId: openId, csbh: csbh },
+				  datatype:"text",
+				  success:function(data){
+					  if(data==tps){
+					  $("#other1").show();
+					  }
+					 $('.VoteLaud').html(data);
+				  },	
+				  //调用出错执行的函数
+		            error: function(){
+		                alert("error");
+		            }
+				});
+		 }
     </script>
 </head>
 <body>
@@ -168,8 +224,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form method="post" action="" id="form1">
 
     <div class="item-info">
+    <input type="hidden" id="tps" name="tps" value="${baby.tps }"/>
         <span style="position: absolute; height: 40px; top: 10px; right: 12px; text-align: right;">
-		<i style="font-style: normal; font-family: Arial;" id="VoteLaud">${baby.tps }</i>
+		<i style="font-style: normal; font-family: Arial;" id="VoteLaud" class="VoteLaud">${baby.tps }</i>
 		票 
 		</span>
 		<span style=" display:block; padding:0px 60px 0px 12px"><i style="font-style: normal; font-family: Arial;">${baby.csbh }</i>号</span>
@@ -182,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="frame">
             <p>
 			<span style="position: absolute; height: 40px; top: 20px; right: 12px; text-align: right;">
-			<i style="font-style: normal; font-family: Arial;" id="VoteLaud">${baby.tps }</i>
+			<i style="font-style: normal; font-family: Arial;" id="VoteLaud" class="VoteLaud">${baby.tps }</i>
 			票 
 			</span>
 			<span style=" display:block;"><i style="font-style: normal; font-family: Arial;">${baby.csbh }</i>号</span>
@@ -203,17 +260,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	</div>
     
     <div class="control">
-   		
+    	<input type="hidden" id="csbh" name="csbh" value="${baby.csbh }"/>
+   		<input type="hidden" id="openId" name="openId" value="${openId }"/>
        <a href="<%=request.getContextPath()%>/prefer/p4/p4.jsp"><img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_12.png" /></a>
-       <img style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_13.png" />
+       <a onclick="tp()"><img style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_13.png" /></a>
     </div>
-    <div class="item-summary item-desc" style="display: none;" id="JoinTip">
-        <div class="frame">
-            <p>
-                如何参加
-                <br>
-                成为“杭州综合频道”（关注微信公众号杭州综合频道：htvweiyi）用户，回复“宝贝”或者点击界面下方的“萌笑宝贝”进入页面，点击我要报名填写相关信息进行成功。
-            </p>
+    <div class="other" id="other1">
+        <div class="tip">您已参与投票!<br>          
+            <a class="close" onclick="$('#other1').hide()">我知道了</a>
         </div>
     </div>
     
@@ -247,88 +301,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
-
-$(document).ready(function(){
-	var url = location.href.split('#')[0];
-	$.ajax({
-	    url:'<%=request.getContextPath()%>/WXController/getSingInfo',
-	    type:'post',     
-	    data:'url='+url,
-	    error:function(){     
-	       alert('error');
-	    },     
-	    success:function(data){
-	       data=eval("("+data+")");//转换为json对象
-	       var appid = data.appid;
-	       var timestamp = data.timestamp;
-	       var nonceStr = data.nonceStr;
-	       var signature = data.signature;
-	       var domain = data.domain;
-	       alert(""+appid+"="+timestamp+"="+nonceStr+"="+signature+"="+domain+"");
-	       //注册事件
-	       wx.config({
-	    	    debug: true,
-	    	    appId: appid,
-	    	    timestamp: timestamp,
-	    	    nonceStr: nonceStr,
-	    	    signature: signature,
-	    	    jsApiList: [
-	    	      'checkJsApi',
-	    	      'onMenuShareTimeline',
-	    	      'onMenuShareAppMessage',
-	    	      'onMenuShareQQ',
-	    	      'onMenuShareWeibo'
-	    	    ]
-	    	});
-	       
-	       	wx.error(function (res) {
-	    		//alert(res.errMsg);
-	    	});
-	       
-	       	wx.ready(function () {
-	       		// 2. 分享接口
-	       		// 2.1 监听“分享给朋友”，自定义分享内容及分享结果接口
-	       		wx.onMenuShareAppMessage({
-	       		    title: '我是小明星',
-	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: domain+'<%=request.getContextPath()%>/prefer/p2/p2.jsp',
-	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
-	       		    trigger: function (res) {
-	       		      alert('用户点击发送给朋友');
-	       		    },
-	       		    success: function (res) {
-	       		      alert('已分享');
-	       		    },
-	       		    cancel: function (res) {
-	       		      alert('已取消');
-	       		    },
-	       		    fail: function (res) {
-	       		      alert(JSON.stringify(res));
-	       		    }
-	       		  });
-	       		
-	       		// 2.2 监听“分享到朋友圈”自定义分享内容及分享结果接口
-	       		wx.onMenuShareTimeline({
-	       			title: '我是小明星',
-	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: '<%=request.getContextPath()%>/prefer/p2/p2.jsp',
-	       		    imgUrl: '<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
-	       		    trigger: function (res) {
-	       		      //alert('用户点击分享到朋友圈');
-	       		    },
-	       		    success: function (res) {
-	       		      //alert('已分享');
-	       		    },
-	       		    cancel: function (res) {
-	       		      //alert('已取消');
-	       		    },
-	       		    fail: function (res) {
-	       		      //alert(JSON.stringify(res));
-	       		    }
-	       		  });	       		
-	       	})	       
-	    }  
-	});
-}); 
-</script>
+    $(document).ready(function(){
+    	var url = location.href.split('#')[0];
+    	//url='http://yrweixin2.hundsun.cn/kfj/baby/getAllBabyList';
+    	$.ajax({
+    		type: 'POST',
+    		url:'<%=request.getContextPath()%>/WXController/getSingInfo',
+			data:{ url: url },
+			datatype:"json",     
+    	    error:function(){     
+    	       alert('error');
+    	    },     
+    	    success:function(data){
+    	       data=eval("("+data+")");//转换为json对象
+    	       var appid = data.appid;
+    	       var timestamp = data.timestamp;
+    	       var nonceStr = data.nonceStr;
+    	       var signature = data.signature;
+    	       var domain = data.domain;
+    	       //注册事件
+    	       wx.config({
+    	    	    debug: false,
+    	    	    appId: appid,
+    	    	    timestamp: timestamp,
+    	    	    nonceStr: nonceStr,
+    	    	    signature: signature,
+    	    	    jsApiList: [
+    	    	      'checkJsApi',
+    	    	      'onMenuShareTimeline',
+    	    	      'onMenuShareAppMessage'
+    	    	    ]
+    	    	});
+    	       
+    	       	wx.error(function (res) {
+    	    		//alert(res.errMsg);
+    	    	});
+    	       
+    	       	wx.ready(function () {
+    	       		wx.onMenuShareAppMessage({
+    	       		    title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		    link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+    	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击发送给朋友');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       		wx.onMenuShareTimeline({
+    	       			title: '我是小明星',
+    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
+    	       		 	link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
+ 	       		    	imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    trigger: function (res) {
+    	       		      //alert('用户点击分享到朋友圈');
+    	       		    },
+    	       		    success: function (res) {
+    	       		      //alert('已分享');
+    	       		    },
+    	       		    cancel: function (res) {
+    	       		      //alert('已取消');
+    	       		    },
+    	       		    fail: function (res) {
+    	       		      //alert(JSON.stringify(res));
+    	       		    }
+    	       		  });
+    	       		
+    	       	});   	       
+    	    }  
+    	});
+    });
+    </script>
 </html>
