@@ -28,7 +28,8 @@
     		<list><!-- 以下用来列出Hibernate映射文件 -->  
         		<value>config/hibernate/user.hbm.xml</value>
         		<value>config/hibernate/baby.hbm.xml</value>  
-         		<value>config/hibernate/wxuser.hbm.xml</value>  
+         		<value>config/hibernate/wxuser.hbm.xml</value>
+         		 
      		</list>  
     	</property> 
 		

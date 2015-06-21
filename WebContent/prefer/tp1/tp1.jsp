@@ -756,7 +756,7 @@ a:active {
             });
 
             $(".image").click(function () {
-                window.location = "item.aspx?openid=" + who + "&id=" + $(this).attr("itm") + "&usign=" + usign;
+               // window.location = "item.aspx?openid=" + who + "&id=" + $(this).attr("itm") + "&usign=" + usign;
             });
 
             loading = $(".loading");
@@ -816,9 +816,6 @@ a:active {
 
         function DoVote(csbh,tps) {
         	var openId = document.getElementById("openId").value; 
-        	alert(csbh);
-        	alert(tps);
-        	alert(openId);
         	if(openId==''){
             	$("#other1").show();
         	}else{
