@@ -19,13 +19,13 @@ public class BabyDaoImpl implements BabyDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Baby> getAllBaby() {
-		String hql = "from Baby order by id DESC";
+		String hql = "from Baby GROUP BY NAME,jzxm order by tps desc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 	
 	public List<Baby> getAllBabyByTps(int firstResult,int maxResults){
-		String hql = "from Baby order by tps DESC";	
+		String hql = "from Baby GROUP BY NAME,jzxm order by tps desc";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setMaxResults(maxResults);  
 		query.setFirstResult(firstResult); 
@@ -33,7 +33,7 @@ public class BabyDaoImpl implements BabyDao {
 	}
 	
 	public List<Baby> getAllBabyByTps(){
-		String hql = "from Baby order by tps DESC";	
+		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
@@ -55,7 +55,7 @@ public class BabyDaoImpl implements BabyDao {
 
 	@Override
 	public int getLjtp(){
-		String hql = "select sum(tps) as tps from Baby";
+		String hql = "select sum(tps) as tps from Baby ";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		@SuppressWarnings("unchecked")
 		List ljtpList = query.list();
@@ -67,13 +67,13 @@ public class BabyDaoImpl implements BabyDao {
 	}
 	
 	public List<Baby> getBabyByCsbh(String csbh){
-		String hql = "from Baby where csbh like '%"+csbh+"%'";	
+		String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 	
 	public List<Baby> getBabyByBbxm(String bbxm){
-		String hql = "from Baby where name like '%"+bbxm+"%'";	
+		String hql = "from Baby where name like '%"+bbxm+"%' GROUP BY NAME,jzxm ";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}

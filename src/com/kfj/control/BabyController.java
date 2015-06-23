@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kfj.entity.Baby;
+import com.kfj.entity.TpRole;
 import com.kfj.entity.WxUser;
 import com.kfj.service.inft.BabyService;
+import com.kfj.service.inft.TpRoleService;
 import com.kfj.service.inft.WxUserService;
 import com.kfj.util.Config;
 import com.kfj.util.ImgCompress;
@@ -42,6 +44,8 @@ public class BabyController {
 	private BabyService babyManager;
 	@Resource(name="wxUserManager")
 	private WxUserService wxUserManager;
+	@Resource(name="TpRoleManager")
+	private TpRoleService TpRoleManager;
 		
 	/**
 	 * TODO �г�baby
@@ -164,7 +168,7 @@ public class BabyController {
 				babyList2.add(babyList.get(i+1));
 			}
 		}
-		request.setAttribute("openId", openId);
+		request.setAttribute("openId",openId);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("currentPage", currentPage1);	
 		request.setAttribute("cyrs", cyrs);	
@@ -246,16 +250,26 @@ public class BabyController {
 		String csbh = request.getParameter("csbh");
 		String openId = request.getParameter("openId");
 		List<Baby> BabyList = babyManager.getBabyByCsbh(csbh);
-		List<WxUser> wxUserList = wxUserManager.getWxUserByOpenId(openId);
+		//List<WxUser> wxUserList = wxUserManager.getWxUserByOpenId(openId);
 		Baby baby = BabyList.get(0);
-		WxUser wxUser = wxUserList.get(0);
+		//WxUser wxUser = wxUserList.get(0);
 		int tps = baby.getTps();
-		if(!Config.TPSTATE_1.equals(wxUser.getTpstate())){
+		List<TpRole> tpRoleList = TpRoleManager.getTpRoleByopenId(openId);
+		String flag ="0";//判断是否已对改宝贝投票（0未投票，1已投票）
+		for(int i=0;i<tpRoleList.size();i++){
+			if(tpRoleList.get(i).getBabyId()==baby.getId()){
+				flag = "1";
+			}
+		}
+		
+		if(!Config.TPSTATE_1.equals(flag)){
 			tps = baby.getTps()+1;
 			baby.setTps(baby.getTps()+1);//投票
 			babyManager.updateBabyTps(baby);
-			wxUser.setTpstate(Config.TPSTATE_1);
-			wxUserManager.updateWxUserTpState(wxUser);			
+			TpRole tpRole = new TpRole();
+			tpRole.setBabyId(baby.getId());
+			tpRole.setOpenId(openId);
+			TpRoleManager.addTpRole(tpRole);		
 		}
         return String.valueOf(tps);
 	}

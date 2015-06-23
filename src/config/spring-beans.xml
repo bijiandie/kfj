@@ -44,5 +44,18 @@
 	<bean name="wxUserManager" parent="transactionProxy">
 		<property name="target" ref="wxUserManagerBase"></property>
 	</bean>	
+	
+	<!--TpRole列表  -->	
+	<bean id="TpRoleDao" class="com.kfj.dao.TpRoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="TpRoleManagerBase" class="com.kfj.service.TpRoleServiceImpl">
+		<property name="TpRoleDao" ref="TpRoleDao"></property>
+	</bean>
+
+	<bean name="TpRoleManager" parent="transactionProxy">
+		<property name="target" ref="TpRoleManagerBase"></property>
+	</bean>	
 
 </beans>

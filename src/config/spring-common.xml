@@ -29,7 +29,7 @@
         		<value>config/hibernate/user.hbm.xml</value>
         		<value>config/hibernate/baby.hbm.xml</value>  
          		<value>config/hibernate/wxuser.hbm.xml</value>
-         		 
+         		<value>config/hibernate/tprole.hbm.xml</value>        		       		 
      		</list>  
     	</property> 
 		

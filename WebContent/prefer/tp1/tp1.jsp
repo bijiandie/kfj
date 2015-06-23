@@ -584,7 +584,7 @@ a:active {
 <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/Unibon.js"></script>
 </head>
 <body style="font: 14px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;">
-    <form method="post" action="default.aspx?id=1" id="form1">
+    <form method="post" action="" id="form1">
     <div id="PicForm" class="content">
         <img src="<%=request.getContextPath()%>/prefer/tp1/style/p1_01.jpg" id="imgTitle" alt="规则" style="width: 100%; height: auto">       
         <div class="control1">
@@ -624,10 +624,10 @@ a:active {
 			        </a>	
 			        	<div class="txt">
 			        		<span class="no">No.${baby1.csbh } ${baby1.name }</span> 
-			        		<span class="votes">${baby1.tps }票</span>
+			        		<span class="votes" id="_${baby1.id }">${baby1.tps }票</span>
 			        	</div>
    						<input type="hidden" id="openId" name="openId" value="${openId }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.tps })">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.tps },${baby1.id })">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -643,10 +643,10 @@ a:active {
 			        </a>
 			        	<div class="txt">
 			        		<span class="no">No.${baby2.csbh } ${baby2.name }</span> 
-			        		<span class="votes">${baby2.tps }票</span>
+			        		<span class="votes" id="_${baby2.id }">${baby2.tps }票</span>
 			        	</div>
 			        	<input type="hidden" id="csbh2" name="csbh2" value="${baby2.csbh }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.tps })">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.tps },${baby2.id })">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -667,7 +667,7 @@ a:active {
     <div style="display: none;" class="search">
         <div> 请输入选手编号或姓名：</div>
         <div>
-            <input name="txtSearch" id="txtSearch" class="c" type="text">
+            <input name="txtSearch" id="txtSearch" class="c" type="text" onblur="getCsbh()">
         </div>
         <a class="join" href="javascript:void(0);" onclick="DoSearch()">搜 索</a>
     </div>
@@ -729,6 +729,7 @@ a:active {
     <script type="text/javascript" src="<%=request.getContextPath()%>/prefer/tp1/style/jweixin-1.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
+   		 var csbh_qj;
         var scrolling = false;
         var scrollTimer;
         var loadTimer;
@@ -809,12 +810,12 @@ a:active {
         	$("#rank").show();
 
         }
-
+ao 
         function ShowSearch() {
             $(".search").show();
         }
 
-        function DoVote(csbh,tps) {
+        function DoVote(csbh,tps,id) {
         	var openId = document.getElementById("openId").value; 
         	if(openId==''){
             	$("#other1").show();
@@ -829,11 +830,11 @@ a:active {
   						 {
   						  $("#other2").show();
   						 }
-  					 $('.votes').html(data);
+  					 $('#_'+id).html(data);
   				  },	
   				  //调用出错执行的函数
   		            error: function(){
-  		                alert("error");
+  		                //alert("error");
   		            }
   				});  
         	}   	       	
@@ -852,6 +853,12 @@ a:active {
                 }
             }
             $(".search").hide();
+        }
+        
+        function getCsbh(){
+        	 var csbh = $("#txtSearch").val();
+        	 var openId = $("#openId").val();
+        	 window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh+"&openId="+openId;
         }
     </script>
     <script type="text/javascript">
