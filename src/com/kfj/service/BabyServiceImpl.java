@@ -26,6 +26,10 @@ public class BabyServiceImpl implements BabyService {
 	public List<Baby> getAllBabyByTps(int firstResult,int maxResults){
 		return babyDao.getAllBabyByTps(firstResult,maxResults);
 	}
+	
+	public List<Baby> getAllBabyById(int firstResult,int maxResults){
+		return babyDao.getAllBabyById(firstResult,maxResults);
+	}
 
 	@Override
 	public void addBaby(Baby baby) {
@@ -58,5 +62,11 @@ public class BabyServiceImpl implements BabyService {
 	@Override
 	public boolean updateBabyTps(Baby baby){
 		return babyDao.updateBabyTps(baby);
+	}
+
+	@Override
+	public List<Baby> getBabyByTps(int firstResult, int maxResults) {
+		// TODO Auto-generated method stub
+		return babyDao.getBabyByTps(firstResult,maxResults);
 	}
 }

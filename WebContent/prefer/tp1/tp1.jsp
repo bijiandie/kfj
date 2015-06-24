@@ -593,12 +593,12 @@ a:active {
 		<div class="control1">
 			<div class="action" style="padding:4%;box-shadow: 2px 2px 1px #848484;">参赛选手</div>
 			<div class="action" style="padding:4%;background-color: #df64a4;box-shadow: 2px 2px 1px #848484;">活动介绍</div>
-			<div class="action" style="padding:4%;background-color: #64aedf;box-shadow: 2px 2px 1px #848484;">活动奖品</div>
+			<a href="javascript:void(0);" onclick="ShowRank()"><div class="action" style="padding:4%;background-color: #64aedf;box-shadow: 2px 2px 1px #848484;">活动奖品</div></a>
 		</div>
         <div class="count">           
-            <span class="action" style="width: 33%;">参与人数<br>${cyrs }</span>
-            <span class="action" style="width: 34%; left: 33%">累计投票<br>${ljtp }</span>
-            <span class="action" style="width: 33%; left: 67%">排行榜<br>${ljtp }</span>
+            <span class="action" style="width: 50%;">参与人数<br>${cyrs }</span>
+            <span class="action" style="width: 50%; left: 50%">累计投票<br>${ljtp }</span>
+            <a href="javascript:void(0);" onclick="ShowRank()"><span class="action" style="width: 33%; left: 67%">排行榜<br>${ljtp }</span></a>
         </div>
 		<div style="float:left;height:12vw;padding-top:6px;width:100%;margin-top: 4%;">
 			<a href="javascript:void(0);" onclick="ShowSearch()"><div style="background: #fff none repeat scroll 0 0;border-radius: 8px;color: #000000;display: block;float: left;font-size: 4vw;padding: 2%;text-align: center;width: 90%;margin-left:3%;">快速查询</div></a>
@@ -659,9 +659,9 @@ a:active {
     </div>
     <div class="control">
         <img alt="" src="<%=request.getContextPath()%>/prefer/tp1/style/vote-bottom.png" style="width: 100%; height: auto">
-        <a class="action" href="tel:0571-123456"></a>
-        <a class="action" onclick="ShowSearch()" style="left: 33%; width: 34%;"></a>
-        <a class="action" href="javascript:void(0);" onclick="ShowRank()" style="left: 67%;"></a>
+        <!-- <a class="action" href="tel:0571-123456"></a> -->
+        <a class="action" onclick="ShowSearch()" style="width: 50%;"></a>
+        <a class="action" href="javascript:void(0);" onclick="ShowRank()" style="left: 50%;width: 50%;"></a>
     </div>
     
     <div style="display: none;" class="search">
@@ -706,16 +706,22 @@ a:active {
     </div>
     <div class="other" id="other1">
         <div class="tip">如何投票：<br>
-            搜索微信公众号：闪耀浙分客服节。添加关注，点击界面下方的“我是小明星”进入页面搜索萌宝姓名或编号，点击”亲一下“，即可为心目中的萌宝投票！
+        	请关注'闪耀浙分客服节'公众帐号,然后在该微信中才能投票。
             <a class="close" onclick="$('#other1').hide()">我知道了</a>
         </div>
     </div>
     <div class="other" id="other2">
-        <div class="tip">您已参与投票！<br>
-            
+        <div class="tip">您已参与投票！<br>           
             <a class="close" onclick="$('#other2').hide()">我知道了</a>
         </div>
     </div>
+    
+    <div class="other" id="other3">
+        <div class="tip">投票成功！<br>           
+            <a class="close" onclick="$('#other3').hide()">我知道了</a>
+        </div>
+    </div>
+    
     <div class="screen"></div>
     <div class="dialog loading">
         <i class="mask"></i>
@@ -830,7 +836,8 @@ ao
   						 {
   						  $("#other2").show();
   						 }
-  					 $('#_'+id).html(data);
+  					 $('#_'+id).html(data+"票");
+  					$("#other3").show();
   				  },	
   				  //调用出错执行的函数
   		            error: function(){

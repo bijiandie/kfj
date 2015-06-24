@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kfj.entity.Baby;
+import com.kfj.entity.TpRole;
 import com.kfj.entity.WxUser;
-import com.kfj.service.BabyServiceImpl;
-import com.kfj.service.WxUserServiceImpl;
 import com.kfj.service.inft.BabyService;
+import com.kfj.service.inft.TpRoleService;
 import com.kfj.service.inft.WxUserService;
 import com.kfj.util.Config;
 import com.kfj.util.HandleLogic;
@@ -38,6 +38,8 @@ public class WXController {
 	private WxUserService wxUserManager;
 	@Resource(name="babyManager")
 	private BabyService babyManager;
+	@Resource(name="TpRoleManager")
+	private TpRoleService TpRoleManager;
 	
 	@RequestMapping(method = {RequestMethod.GET})
 	public void wxGet(HttpServletRequest request, HttpServletResponse response){
@@ -87,12 +89,9 @@ public class WXController {
 			}else if(Config.EVE_UNSUBSCRIBE.equals(mx.getEvent())){//取消关注
 				
 			}else if(Config.MSG_TYPE_TEXT.equals(mx.getMsgType())){//文本消息
-				String text = mx.getContent();
-				int symtps = 0;//上一名投票数
-				int firsttps = 0;//第一名投票数
-				int tps = 0;//投票数
+				String text = mx.getContent();				
 				List<Baby> entityList = babyManager.getBabyByCsbh(text);
-				if(entityList.size()<=0){
+				if(entityList.size()<=0||!text.matches("\\d{6}")){
 					responseStr = XmlStructureUtil.Structure(mx, Config.ERROR_0);
 				}else{
 					List<Baby> BabyList = babyManager.getAllBabyByTps();
@@ -104,15 +103,14 @@ public class WXController {
 							break;
 						}						
 					}
-					firsttps = BabyList.get(0).getTps();
-					//如果是第一名的情况
-					if(j>=2){
-						symtps = BabyList.get(j-2).getTps();
-					}else{
-						symtps = BabyList.get(j-1).getTps();
+					List<TpRole> tpRoleList = TpRoleManager.getTpRoleByopenId(openId);
+					String flag ="0";//判断是否已对改宝贝投票（0未投票，1已投票）
+					for(int i=0;i<tpRoleList.size();i++){
+						if(tpRoleList.get(i).getBabyId()==entityList.get(0).getId()){
+							flag = "1";
+						}
 					}
-					tps = BabyList.get(j-1).getTps();
-					mx = HandleLogic.handTextByCsbh(mx,text,j,tps,firsttps,symtps,openId);
+					mx = HandleLogic.handTextByCsbh(mx,text,j,BabyList,flag,openId);
 					responseStr = XmlStructureUtil.NewStructure(mx);
 				}
 				response.getWriter().write(responseStr);

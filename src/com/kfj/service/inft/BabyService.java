@@ -18,6 +18,13 @@ public interface BabyService {
 	 * @return
 	 */
 	public List<Baby> getAllBabyByTps(int firstResult,int maxResults);
+	/**
+	 * 
+	 * @param firstResult
+	 * @param maxResults
+	 * @return
+	 */
+	public List<Baby> getAllBabyById(int firstResult,int maxResults);
 	
 	/**
 	 * TODO ����baby
@@ -59,4 +66,10 @@ public interface BabyService {
 	 * @return
 	 */
 	public boolean updateBabyTps(Baby baby);
+	/**
+	 * TODO 
+	 * @param 
+	 * @return
+	 */
+	public List<Baby> getBabyByTps(int firstResult,int maxResults);
 }

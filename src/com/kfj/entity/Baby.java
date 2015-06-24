@@ -52,6 +52,10 @@ public class Baby {
 	 * 排名
 	 */
 	private int num;
+	/**
+	 * 图片路径
+	 */
+	private String newpicture;
 	public int getId() {
 		return id;
 	}
@@ -131,6 +135,13 @@ public class Baby {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public String getNewpicture() {
+		return newpicture;
+	}
+	public void setNewpicture(String newpicture) {
+		this.newpicture = newpicture;
+	}
+	
 
 
 	

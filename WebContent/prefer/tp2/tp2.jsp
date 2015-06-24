@@ -194,6 +194,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var openId = document.getElementById("openId").value;
 			var csbh = document.getElementById("csbh").value;	
 			var tps = document.getElementById("tps").value;
+			if(openId==''){
+				$("#VoteTip").show();
+				return;
+			}
 			$.ajax({
 				  type: 'POST',
 				  url:'<%=request.getContextPath()%>/baby/tpBaby',
@@ -233,6 +237,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<span style="position: absolute;right: 44%;top: 10px;">${baby.name }</span>    
     </div>
     <div class="item-logo">
+    	<input type="hidden" id="picture" name="picture" value="http://7xjg0r.com1.z0.glb.clouddn.com/${baby.picture }"/>
         <img src="http://7xjg0r.com1.z0.glb.clouddn.com/${baby.picture }" id="ItemLink">
     </div>
     <div class="item-summary item-desc">
@@ -244,6 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</span>
 			<span style=" display:block;"><i style="font-style: normal; font-family: Arial;">${baby.csbh }</i>号</span>
 			<span style="position: absolute;right: 44%;top: 20px;">${baby.name }</span>
+			<input type="hidden" id="babyName" name="babyName" value="${baby.name }"/>
             </p>
 			<p>参赛才艺： ${baby.talent }</p>
 			<p>成长宣言：</p>
@@ -277,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p>
                 如何投票：
                 <br>
-                搜索微信公众号：杭州综合频道。添加关注，回复“宝贝”或点击界面下方的“萌笑宝贝”进入页面搜索萌宝姓名或编号，点击”亲一下“，即可为心目中的萌宝投票！</p>
+                请关注'闪耀浙分客服节'公众帐号,然后在该微信中才能投票。</p>
         </div>
     </div>
     <div class="item-summary">
@@ -303,6 +309,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
     $(document).ready(function(){
     	var url = location.href.split('#')[0];
+    	var babyName = document.getElementById("babyName").value;
+    	var picture = document.getElementById("picture").value;
+    	var openId = document.getElementById("openId").value;
+    	var csbh = document.getElementById("csbh").value;
     	//url='http://yrweixin2.hundsun.cn/kfj/baby/getAllBabyList';
     	$.ajax({
     		type: 'POST',
@@ -339,10 +349,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	       
     	       	wx.ready(function () {
     	       		wx.onMenuShareAppMessage({
-    	       		    title: '我是小明星',
-    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-    	       		    link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
-    	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       		    title: '快来帮\''+babyName+'\'投一票！',
+    	       		    desc: '我正在参加我是小明星评比，叔叔阿姨们快来帮我投一票吧',
+    	       		    link: domain+'<%=request.getContextPath()%>/baby/getBabyById?csbh='+csbh,
+    	       		    imgUrl: picture,
     	       		    trigger: function (res) {
     	       		      //alert('用户点击发送给朋友');
     	       		    },
@@ -358,10 +368,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	       		  });
     	       		
     	       		wx.onMenuShareTimeline({
-    	       			title: '我是小明星',
-    	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-    	       		 	link: domain+'<%=request.getContextPath()%>/baby/getAllBabyList',
- 	       		    	imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+    	       			title: '快来帮\''+babyName+'\'投一票！',
+    	       		    desc: '我正在参加我是小明星评比，叔叔阿姨们快来帮我投一票吧',
+    	       		 	link: domain+'<%=request.getContextPath()%>/baby/getBabyById?csbh='+csbh,
+ 	       		    	imgUrl: picture,
     	       		    trigger: function (res) {
     	       		      //alert('用户点击分享到朋友圈');
     	       		    },

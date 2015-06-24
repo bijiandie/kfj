@@ -150,14 +150,14 @@ public class BabyController {
 		int recordCount = entityList.size();//总共的条数 
 		int  currentPage1 = 0;//当前页面 
 		Integer currentSize = 0;//当前页面第一条数据 
-		int pageSize = 10;//每页显示的条数 
+		int pageSize = 16;//每页显示的条数 
 		int pageCount = HttpUtil.getPageCount(recordCount, pageSize);
 		if(currentPage!=null){
 			currentPage1 = Integer.valueOf(currentPage);
 			currentSize = currentPage1*pageSize;
 		}
 			
-		List<Baby> babyList = babyManager.getAllBabyByTps(currentSize,pageSize);		
+		List<Baby> babyList = babyManager.getAllBabyById(currentSize,pageSize);		
 		List<Baby> babyList1 = new ArrayList<Baby>();
 		List<Baby> babyList2 = new ArrayList<Baby>();
 		int cyrs = entityList.size();
@@ -184,7 +184,7 @@ public class BabyController {
 		request.setCharacterEncoding("utf-8");  //这里不设置编码会有乱码
         response.setContentType("text/html;charset=utf-8");
         response.setHeader("Cache-Control", "no-cache");  
-		List<Baby> babyList = babyManager.getAllBabyByTps();
+		List<Baby> babyList = babyManager.getBabyByTps(0,120);
 		for(int i=0;i<babyList.size();i++){
 			babyList.get(i).setNum(i+1);
 		}

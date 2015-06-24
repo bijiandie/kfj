@@ -31,9 +31,16 @@ public class BabyDaoImpl implements BabyDao {
 		query.setFirstResult(firstResult); 
 		return query.list();
 	}
+	public List<Baby> getAllBabyById(int firstResult,int maxResults){
+		String hql = "from Baby GROUP BY NAME,jzxm order by id asc";	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setMaxResults(maxResults);  
+		query.setFirstResult(firstResult); 
+		return query.list();
+	}
 	
 	public List<Baby> getAllBabyByTps(){
-		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc";	
+		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
@@ -67,13 +74,13 @@ public class BabyDaoImpl implements BabyDao {
 	}
 	
 	public List<Baby> getBabyByCsbh(String csbh){
-		String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm";	
+		String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm order by id asc";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
 	
 	public List<Baby> getBabyByBbxm(String bbxm){
-		String hql = "from Baby where name like '%"+bbxm+"%' GROUP BY NAME,jzxm ";	
+		String hql = "from Baby where name like '%"+bbxm+"%' GROUP BY NAME,jzxm order by id asc";	
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
@@ -84,6 +91,15 @@ public class BabyDaoImpl implements BabyDao {
 		query.setInteger(0, baby.getTps());
 		query.setInteger(1, baby.getId());		
 		return (query.executeUpdate() > 0);
+	}
+
+	@Override
+	public List<Baby> getBabyByTps(int firstResult, int maxResults) {
+		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";	
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setMaxResults(maxResults);  
+		query.setFirstResult(firstResult); 
+		return query.list();
 	}
 	
 }

@@ -37,6 +37,18 @@ public interface BabyDao {
 	 */
 	public List<Baby> getAllBabyByTps(int firstResult,int maxResults);
 	/**
+	 * TODO 
+	 * @param 
+	 * @return
+	 */
+	public List<Baby> getAllBabyById(int firstResult,int maxResults);
+	/**
+	 * TODO 
+	 * @param 
+	 * @return
+	 */
+	public List<Baby> getBabyByTps(int firstResult,int maxResults);
+	/**
 	 * 根据投票数获取
 	 * @return
 	 */
