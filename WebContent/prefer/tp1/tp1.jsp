@@ -596,9 +596,9 @@ a:active {
 			<a href="javascript:void(0);" onclick="ShowRank()"><div class="action" style="padding:4%;background-color: #64aedf;box-shadow: 2px 2px 1px #848484;">活动奖品</div></a>
 		</div>
         <div class="count">           
-            <span class="action" style="width: 50%;">参与人数<br>${cyrs }</span>
-            <span class="action" style="width: 50%; left: 50%">累计投票<br>${ljtp }</span>
-            <a href="javascript:void(0);" onclick="ShowRank()"><span class="action" style="width: 33%; left: 67%">排行榜<br>${ljtp }</span></a>
+            <span class="action" style="width: 33%;">参与人数<br>${cyrs }</span>
+            <span class="action" style="width: 34%; left: 33%">累计投票<br>${ljtp }</span>
+            <a href="javascript:void(0);" onclick="ShowRank()"><span class="action" style="width: 33%; left: 67%">排行榜<br></span></a>
         </div>
 		<div style="float:left;height:12vw;padding-top:6px;width:100%;margin-top: 4%;">
 			<a href="javascript:void(0);" onclick="ShowSearch()"><div style="background: #fff none repeat scroll 0 0;border-radius: 8px;color: #000000;display: block;float: left;font-size: 4vw;padding: 2%;text-align: center;width: 90%;margin-left:3%;">快速查询</div></a>
@@ -835,9 +835,10 @@ ao
   					 if(data==tps)
   						 {
   						  $("#other2").show();
+  						 }else{
+  					 		$('#_'+id).html(data+"票");
+  							$("#other3").show();
   						 }
-  					 $('#_'+id).html(data+"票");
-  					$("#other3").show();
   				  },	
   				  //调用出错执行的函数
   		            error: function(){

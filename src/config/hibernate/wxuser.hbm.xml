@@ -5,7 +5,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.kfj.entity.WxUser" table="WxUser">
+    <class name="com.kfj.entity.WxUser" table="wxuser">
         <id name="id" column="id" type="java.lang.Integer"></id>
         <property name="OPENID" type="java.lang.String" column="OPENID"/>       
         <property name="gzState" type="java.lang.String" column="gzState"/> 

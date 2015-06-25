@@ -206,8 +206,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  success:function(data){
 					  if(data==tps){
 					  $("#other1").show();
+					  }else{
+					 	$('.VoteLaud').html(data);
+						 $("#other2").show();
 					  }
-					 $('.VoteLaud').html(data);
 				  },	
 				  //调用出错执行的函数
 		            error: function(){
@@ -277,6 +279,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
+    <div class="other" id="other2">
+        <div class="tip">投票成功!<br>          
+            <a class="close" onclick="$('#other2').hide()">我知道了</a>
+        </div>
+    </div>
     
     <div class="item-summary item-desc" style="display: none;" id="VoteTip">
         <div class="frame">

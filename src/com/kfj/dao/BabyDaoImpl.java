@@ -74,7 +74,8 @@ public class BabyDaoImpl implements BabyDao {
 	}
 	
 	public List<Baby> getBabyByCsbh(String csbh){
-		String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm order by id asc";	
+		//String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm order by id asc";	
+		String hql = "from Baby where csbh in (select csbh from Baby GROUP BY NAME,jzxm) and csbh like '%"+csbh+"%' order by id asc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
