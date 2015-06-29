@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>晒“萌笑”宝贝，拿苹果Watch！</title>
+<title>我是小明星评选</title>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"><meta name="Keywords"><meta name="Description">
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="no-cache,must-revalidate" http-equiv="Cache-Control"><meta content="no-cache" http-equiv="pragma"><meta content="0" http-equiv="expires"><meta content="telephone=no, address=no" name="format-detection"><meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -591,9 +591,15 @@ a:active {
             <div class="action" ext="0" id="btnJoin" style="background-color: rgb(57, 135, 71); font-size: 4vw; width: 96%;"><a style="color:#FFFFFF;" href="<%=request.getContextPath()%>/prefer/p4/p4.jsp">我要报名</a></div>
         </div>
 		<div class="control1">
-			<div class="action" style="padding:4%;box-shadow: 2px 2px 1px #848484;">参赛选手</div>
-			<div class="action" style="padding:4%;background-color: #df64a4;box-shadow: 2px 2px 1px #848484;">活动介绍</div>
-			<a href="javascript:void(0);" onclick="ShowRank()"><div class="action" style="padding:4%;background-color: #64aedf;box-shadow: 2px 2px 1px #848484;">活动奖品</div></a>
+			<div class="action" style="padding:4%;box-shadow: 2px 2px 1px #848484;" onclick="discont(1)">主办单位</div>
+			<div class="action" style="padding:4%;background-color: #df64a4;box-shadow: 2px 2px 1px #848484;" onclick="discont(2)">活动介绍</div>
+			<div class="action" style="padding:4%;background-color: #64aedf;box-shadow: 2px 2px 1px #848484;" onclick="discont(3)">活动奖品</div>
+			<input type="hidden" value="0" id="ext" />
+		</div>
+		<div>
+			<img src="<%=request.getContextPath()%>/prefer/tp1/style/but_cont_1.png" id="dis1" width="100%" style="display:none;" />
+			<img src="<%=request.getContextPath()%>/prefer/tp1/style/but_cont_3.png" id="dis2" width="100%" style="display:none;" />
+			<img src="<%=request.getContextPath()%>/prefer/tp1/style/but_cont_2.png" id="dis3" width="100%" style="display:none;" />
 		</div>
         <div class="count">           
             <span class="action" style="width: 33%;">参与人数<br>${cyrs }</span>
@@ -627,7 +633,7 @@ a:active {
 			        		<span class="votes" id="_${baby1.id }">${baby1.tps }票</span>
 			        	</div>
    						<input type="hidden" id="openId" name="openId" value="${openId }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.tps },${baby1.id })">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.csbh},${baby1.tps },${baby1.id },'${baby1.name }')">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -646,7 +652,7 @@ a:active {
 			        		<span class="votes" id="_${baby2.id }">${baby2.tps }票</span>
 			        	</div>
 			        	<input type="hidden" id="csbh2" name="csbh2" value="${baby2.csbh }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.tps },${baby2.id })">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.csbh},${baby2.tps },${baby2.id },'${baby2.name }')">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -706,8 +712,18 @@ a:active {
     </div>
     <div class="other" id="other1">
         <div class="tip">如何投票：<br>
-        	请关注'闪耀浙分客服节'公众帐号,然后在该微信中才能投票。
-            <a class="close" onclick="$('#other1').hide()">我知道了</a>
+        	<span id="gz">请关注'闪耀浙分客服节'公众帐号,回复宝贝参赛编号后进行投票。</span><br>
+           
+           <div style="text-align:center">
+           <span style="width: 45%;float:left"> 
+           	<a class="close" onclick="$('#other1').hide()" style="width: 100%;">我知道了</a>
+           </span>
+           <span style="width: 45%;float:right;"> 
+            <a class="close" onclick="yjgz()" style="width: 100%;">一键关注</a>
+            </span>
+            </div>
+            
+
         </div>
     </div>
     <div class="other" id="other2">
@@ -794,6 +810,9 @@ a:active {
             }
         }
 
+        function yjgz(){
+	    	window.location.href = 'http://mp.weixin.qq.com/s?__biz=MzA3NDk3NzY5Ng==&mid=206362457&idx=1&sn=3bc5c1c7b0c8e22938961164ac8033df#rd';
+	    }
         function ShowRank() {
         	$.ajax({
 				  type: 'POST',
@@ -821,9 +840,10 @@ ao
             $(".search").show();
         }
 
-        function DoVote(csbh,tps,id) {
+        function DoVote(csbh,csbh1,tps,id,name) {
         	var openId = document.getElementById("openId").value; 
         	if(openId==''){
+        		 document.getElementById("gz").innerHTML = "请点击“一键关注”按钮关注公众帐号，回复参赛编号"+csbh1+"为宝贝'"+name+"'投票吧！"; 
             	$("#other1").show();
         	}else{
         		$.ajax({
@@ -868,6 +888,20 @@ ao
         	 var openId = $("#openId").val();
         	 window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh+"&openId="+openId;
         }
+        
+        function discont(i){
+			$('#dis1').hide();
+			$('#dis2').hide();
+			$('#dis3').hide();
+			var ext = $('#ext').val();
+			if(ext == '0'){
+				$('#dis'+i).show();
+				$('#ext').val('1');
+			}else{
+				$('#dis'+i).hide();
+				$('#ext').val('0');
+			}
+		}
     </script>
     <script type="text/javascript">
     $(document).ready(function(){

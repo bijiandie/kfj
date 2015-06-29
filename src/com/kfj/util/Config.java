@@ -10,7 +10,7 @@ public class Config {
 	/**
 	 * 微信参数
 	 */
-	public static String URL = "http://yrweixin2.hundsun.cn/kfj";
+	public static String URL = "http://kfj.weixin.iflydo.com/kfj";
 	public static String ACCESS_KEY = "7QkB-BXcR1JP2HLJXLoOmsByUVza72lBm_rTNeza";
 	public static String SECRET_KEY = "FeK2rcR_hiZ1e6cl1zJq4c2KJ2yQQsLcrptMXyBW";
 	public static String BUCKETNAME = "wsxmx";

@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>晒“萌笑”宝贝，拿苹果Watch！</title>
+    <title>我是小明星评选</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
@@ -184,6 +184,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        $(".sharemask").show();
 	    }
 	
+	    function yjgz(){
+	    	window.location.href = 'http://mp.weixin.qq.com/s?__biz=MzA3NDk3NzY5Ng==&mid=206362457&idx=1&sn=3bc5c1c7b0c8e22938961164ac8033df#rd';
+	    }
 		 $(function () {
 			 $("#sharemask").click(function () {
 	             $(".sharemask").hide();
@@ -263,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div> -->
     
     <div class="control">    
-        <img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_06.png"/> 
+        <a onclick="yjgz()"><img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_06.png"/></a> 
  		<a onclick="DoShare()"><img alt="" style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_08.png"></a>
  	</div>
     

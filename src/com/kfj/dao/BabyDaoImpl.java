@@ -3,6 +3,7 @@ package com.kfj.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 
 import com.kfj.dao.inft.BabyDao;
@@ -19,9 +20,11 @@ public class BabyDaoImpl implements BabyDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Baby> getAllBaby() {
-		String hql = "from Baby GROUP BY NAME,jzxm order by tps desc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		//String hql = "from Baby GROUP BY NAME,jzxm order by tps desc";
+		//Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		String sql = "SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm ORDER BY csbh";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);
+		return sqlQuery.list();
 	}
 	
 	public List<Baby> getAllBabyByTps(int firstResult,int maxResults){
@@ -32,17 +35,20 @@ public class BabyDaoImpl implements BabyDao {
 		return query.list();
 	}
 	public List<Baby> getAllBabyById(int firstResult,int maxResults){
-		String hql = "from Baby GROUP BY NAME,jzxm order by id asc";	
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setMaxResults(maxResults);  
-		query.setFirstResult(firstResult); 
-		return query.list();
+		//String hql = "from Baby GROUP BY NAME,jzxm order by id asc";	
+		//Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		String sql = "SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm ORDER BY csbh asc";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);		
+		sqlQuery.setMaxResults(maxResults);  
+		sqlQuery.setFirstResult(firstResult); 
+		return sqlQuery.list();
 	}
 	
 	public List<Baby> getAllBabyByTps(){
-		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";	
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		//String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";
+		String sql = "SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);
+		return sqlQuery.list();
 	}
 
 	@Override
@@ -75,15 +81,17 @@ public class BabyDaoImpl implements BabyDao {
 	
 	public List<Baby> getBabyByCsbh(String csbh){
 		//String hql = "from Baby where csbh like '%"+csbh+"%' GROUP BY NAME,jzxm order by id asc";	
-		String hql = "from Baby where csbh in (select csbh from Baby GROUP BY NAME,jzxm) and csbh like '%"+csbh+"%' order by id asc";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		//String hql = "from Baby where csbh in (select csbh from Baby GROUP BY NAME,jzxm) and csbh like '%"+csbh+"%' order by id asc";
+		String sql = "SELECT * FROM (SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm )  a  WHERE csbh LIKE '%"+csbh+"%' order by id asc";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);
+		return sqlQuery.list();
 	}
 	
 	public List<Baby> getBabyByBbxm(String bbxm){
-		String hql = "from Baby where name like '%"+bbxm+"%' GROUP BY NAME,jzxm order by id asc";	
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		//String hql = "from Baby where name like '%"+bbxm+"%' GROUP BY NAME,jzxm order by id asc";
+		String sql = "SELECT * FROM (SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm )  a  WHERE name LIKE '%"+bbxm+"%' order by id asc";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);
+		return sqlQuery.list();
 	}
 	
 	public boolean updateBabyTps(Baby baby){
@@ -96,11 +104,12 @@ public class BabyDaoImpl implements BabyDao {
 
 	@Override
 	public List<Baby> getBabyByTps(int firstResult, int maxResults) {
-		String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";	
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setMaxResults(maxResults);  
-		query.setFirstResult(firstResult); 
-		return query.list();
+		//String hql = "from Baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";	
+		String sql = "SELECT * FROM (SELECT * FROM baby ORDER BY id DESC) baby GROUP BY NAME,jzxm  order by tps desc,csbh asc";
+		SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Baby.class);
+		sqlQuery.setMaxResults(maxResults);  
+		sqlQuery.setFirstResult(firstResult); 
+		return sqlQuery.list();
 	}
 	
 }

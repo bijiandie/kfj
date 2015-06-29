@@ -109,7 +109,7 @@ $(document).ready(function(){
 	       		wx.onMenuShareAppMessage({
 	       		    title: '我是小明星',
 	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: domain+'<%=request.getContextPath()%>/prefer/p4/p4.jsp',
+	       		    link: domain+'<%=request.getContextPath()%>/prefer/p2/p2.jsp',
 	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
 	       		    trigger: function (res) {
 	       		      //alert('用户点击发送给朋友');
@@ -129,7 +129,7 @@ $(document).ready(function(){
 	       		wx.onMenuShareTimeline({
 	       			title: '我是小明星',
 	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: '<%=request.getContextPath()%>/prefer/p4/p4.jsp',
+	       		    link: '<%=request.getContextPath()%>/prefer/p2/p2.jsp',
 	       		    imgUrl: '<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
 	       		    trigger: function (res) {
 	       		      //alert('用户点击分享到朋友圈');

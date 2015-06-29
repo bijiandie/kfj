@@ -89,7 +89,12 @@ public class WXController {
 			}else if(Config.EVE_UNSUBSCRIBE.equals(mx.getEvent())){//取消关注
 				
 			}else if(Config.MSG_TYPE_TEXT.equals(mx.getMsgType())){//文本消息
-				String text = mx.getContent();				
+				String text = mx.getContent();	
+				String str="";
+				for(int j=text.length();j<6;j++){
+					str = str+"0";
+				}
+				text = str+text;
 				List<Baby> entityList = babyManager.getBabyByCsbh(text);
 				if(entityList.size()<=0||!text.matches("\\d{6}")){
 					responseStr = XmlStructureUtil.Structure(mx, Config.ERROR_0);

@@ -93,8 +93,10 @@ public class BabyController {
 			baby.setCzjy(czjy);
 			baby.setJzxm(jzxm);
 			List<Baby> babyList = babyManager.getAllBaby();	
-			if(babyList.size()>0){
-				int csbh_ = Integer.valueOf(babyList.get(0).getCsbh())+1;
+			List<Baby> babyList1 = babyManager.getAllBabyById(0,babyList.size());
+			
+			if(babyList1.size()>0){
+				int csbh_ = Integer.valueOf(babyList.get(babyList1.size()-1).getCsbh())+1;
 				csbh = String.valueOf(csbh_);
 				StringBuffer a = new StringBuffer();
 				for(int j=csbh.length();j<6;j++){
@@ -169,6 +171,7 @@ public class BabyController {
 			}
 		}
 		request.setAttribute("openId",openId);
+		request.setAttribute("flage", 0);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("currentPage", currentPage1);	
 		request.setAttribute("cyrs", cyrs);	
