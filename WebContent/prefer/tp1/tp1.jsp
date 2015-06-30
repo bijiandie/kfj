@@ -633,7 +633,7 @@ a:active {
 			        		<span class="votes" id="_${baby1.id }">${baby1.tps }票</span>
 			        	</div>
    						<input type="hidden" id="openId" name="openId" value="${openId }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.csbh},${baby1.tps },${baby1.id },'${baby1.name }')">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby1.csbh}',${baby1.tps },${baby1.id },'${baby1.name }')">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -652,7 +652,7 @@ a:active {
 			        		<span class="votes" id="_${baby2.id }">${baby2.tps }票</span>
 			        	</div>
 			        	<input type="hidden" id="csbh2" name="csbh2" value="${baby2.csbh }"/>
-			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.csbh},${baby2.tps },${baby2.id },'${baby2.name }')">点赞</a>
+			        	<a href="javascript:void(0);" class="action" onclick="DoVote('${baby2.csbh}',${baby2.tps },${baby2.id },'${baby2.name }')">点赞</a>
 
 			        </div>
 		        </c:forEach>
@@ -716,10 +716,10 @@ a:active {
            
            <div style="text-align:center">
            <span style="width: 45%;float:left"> 
-           	<a class="close" onclick="$('#other1').hide()" style="width: 100%;">我知道了</a>
+           <a class="close" onclick="yjgz()" style="width: 100%;">一键关注</a>          
            </span>
            <span style="width: 45%;float:right;"> 
-            <a class="close" onclick="yjgz()" style="width: 100%;">一键关注</a>
+            	<a class="close" onclick="$('#other1').hide()" style="width: 100%;">我知道了</a>
             </span>
             </div>
             
@@ -840,10 +840,10 @@ ao
             $(".search").show();
         }
 
-        function DoVote(csbh,csbh1,tps,id,name) {
+        function DoVote(csbh,tps,id,name) {
         	var openId = document.getElementById("openId").value; 
         	if(openId==''){
-        		 document.getElementById("gz").innerHTML = "请点击“一键关注”按钮关注公众帐号，回复参赛编号"+csbh1+"为宝贝'"+name+"'投票吧！"; 
+        		 document.getElementById("gz").innerHTML = "请点击“一键关注”按钮关注公众帐号，回复参赛编号'"+csbh.substring(csbh.lastIndexOf('0')+1)+"'为宝贝"+name+"投票吧！"; 
             	$("#other1").show();
         	}else{
         		$.ajax({
@@ -889,19 +889,24 @@ ao
         	 window.location = "<%=request.getContextPath()%>/baby/getBabyByCsbh?csbh="+csbh+"&openId="+openId;
         }
         
+        var preTab = -1;
         function discont(i){
-			$('#dis1').hide();
-			$('#dis2').hide();
-			$('#dis3').hide();
-			var ext = $('#ext').val();
-			if(ext == '0'){
-				$('#dis'+i).show();
-				$('#ext').val('1');
-			}else{
-				$('#dis'+i).hide();
-				$('#ext').val('0');
-			}
-		}
+            var ext = $('#ext').val();
+            if(preTab == -1){
+                $('#dis'+i).show();
+                preTab = i;
+            }else {
+                if(preTab == i){
+                     $('#dis'+i).hide();
+                     preTab = -1;
+                }else{
+                    $('#dis'+preTab).hide();
+                    $('#dis'+i).show();
+                     preTab = i;
+                }
+            }
+        }
+
     </script>
     <script type="text/javascript">
     $(document).ready(function(){

@@ -41,6 +41,9 @@
         <div class="content">
             <img src="../prefer/p3/style/p3_01.jpg" class="img" />
             <div class="clear"></div>
+            <input type="hidden" id="csbh" name="csbh" value="${csbh}"/>
+            <input type="hidden" id="babyName" name="babyName" value="${babyName}"/>
+            <input type="hidden" id="picture" name="picture" value="http://7xjg0r.com1.z0.glb.clouddn.com/${picName }"/>
             <div class="wz">您的参赛编号是<br>${csbh }</div>
             <img src="../prefer/p3/style/p3_03.jpg" class="img" />
             <div class="clear"></div>
@@ -68,6 +71,9 @@
 
 $(document).ready(function(){
 	var url = location.href.split('#')[0];
+	var csbh = document.getElementById("csbh").value;
+	var babyName = document.getElementById("babyName").value;
+	var picture = document.getElementById("picture").value;
 	$.ajax({
 	    url:'<%=request.getContextPath()%>/WXController/getSingInfo',
 	    type:'post',     
@@ -107,10 +113,10 @@ $(document).ready(function(){
 	       		// 2. 分享接口
 	       		// 2.1 监听“分享给朋友”，自定义分享内容及分享结果接口
 	       		wx.onMenuShareAppMessage({
-	       		    title: '我是小明星',
-	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: domain+'<%=request.getContextPath()%>/prefer/p2/p2.jsp',
-	       		    imgUrl: domain+'<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+	       		    title: '快来帮'+csbh+'号'+babyName+'投一票！',
+	       		    desc: '叔叔阿姨们快来帮我投票吧~',
+	       		    link: domain+'<%=request.getContextPath()%>/baby/getBabyById?csbh='+csbh,
+	       		 	imgUrl: picture,
 	       		    trigger: function (res) {
 	       		      //alert('用户点击发送给朋友');
 	       		    },
@@ -127,10 +133,10 @@ $(document).ready(function(){
 	       		
 	       		// 2.2 监听“分享到朋友圈”自定义分享内容及分享结果接口
 	       		wx.onMenuShareTimeline({
-	       			title: '我是小明星',
-	       		    desc: '下载平安人寿APP，参加我是小明星电视评选大赛，获取旅游大奖,暑假带孩子玩遍世界...',
-	       		    link: '<%=request.getContextPath()%>/prefer/p2/p2.jsp',
-	       		    imgUrl: '<%=request.getContextPath()%>/prefer/p1/style/p1_01.jpg',
+	       		 	title: '快来帮'+csbh+'号'+babyName+'投一票！',
+	       		    desc: '叔叔阿姨们快来帮我投票吧~',
+	       		    link: domain+'<%=request.getContextPath()%>/baby/getBabyById?csbh='+csbh,
+	       		 	imgUrl: picture,
 	       		    trigger: function (res) {
 	       		      //alert('用户点击分享到朋友圈');
 	       		    },

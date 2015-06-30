@@ -112,6 +112,8 @@ public class BabyController {
 			baby.setCsbh(String.valueOf(csbh));
 			babyManager.addBaby(baby);
 			model.addAttribute("csbh", csbh);
+			model.addAttribute("picName", picName);
+			model.addAttribute("babyName", name);
 			
 		}catch(Exception ex){
 			System.out.println(ex);

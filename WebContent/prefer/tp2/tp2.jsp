@@ -197,8 +197,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var openId = document.getElementById("openId").value;
 			var csbh = document.getElementById("csbh").value;	
 			var tps = document.getElementById("tps").value;
+			var babyName = document.getElementById("babyName").value;
 			if(openId==''){
-				$("#VoteTip").show();
+       		 document.getElementById("gz").innerHTML = "请点击“一键关注”按钮关注公众帐号，回复参赛编号'"+csbh.substring(csbh.lastIndexOf('0')+1)+"'为宝贝"+babyName+"投票吧！"; 
+
+				$("#other3").show();
 				return;
 			}
 			$.ajax({
@@ -273,6 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="control">
     	<input type="hidden" id="csbh" name="csbh" value="${baby.csbh }"/>
    		<input type="hidden" id="openId" name="openId" value="${openId }"/>
+   		<input type="hidden" id="babyName" name="babyName" value="${baby.name }"/>
        <a href="<%=request.getContextPath()%>/prefer/p4/p4.jsp"><img style="width:48%;float:left;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_12.png" /></a>
        <a onclick="tp()"><img style="width:48%;float:right;" src="<%=request.getContextPath()%>/prefer/tp2/style/p2_13.png" /></a>
     </div>
@@ -287,13 +291,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a class="close" onclick="$('#other2').hide()">我知道了</a>
         </div>
     </div>
-    
+    <div class="other" id="other3">
+        <div class="tip">如何投票：<br>
+        	<span id="gz">请关注'闪耀浙分客服节'公众帐号,回复宝贝参赛编号后进行投票。</span><br>          
+           <a class="close" onclick="$('#other3').hide()">我知道了</a>
+        </div>
+    </div>
     <div class="item-summary item-desc" style="display: none;" id="VoteTip">
         <div class="frame">
             <p>
                 如何投票：
                 <br>
-                请关注'闪耀浙分客服节'公众帐号,然后在该微信中才能投票。</p>
+                请关注'闪耀浙分客服节'公众帐号,回复宝贝参赛编号后进行投票。</p>
         </div>
     </div>
     <div class="item-summary">
