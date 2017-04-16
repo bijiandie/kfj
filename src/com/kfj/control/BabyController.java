@@ -82,6 +82,8 @@ public class BabyController {
 			
 			Response r = uploadManager.put(data,picName,token);
 			System.out.println("status:"+r.statusCode);
+			System.out.println("status:"+r.statusCode);
+			System.out.println("status:"+r.statusCode);
 			
 			Baby baby = new Baby();
 			baby.setName(name);
